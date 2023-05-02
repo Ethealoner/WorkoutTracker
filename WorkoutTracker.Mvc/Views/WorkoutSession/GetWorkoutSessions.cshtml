@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WorkoutSession>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkoutDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkoutScore)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model is not null)
+        {
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.WorkoutDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.WorkoutScore)
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>

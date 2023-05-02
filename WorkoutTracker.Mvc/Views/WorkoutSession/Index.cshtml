@@ -1,0 +1,9 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Workout Sessions";
+}
+@User.Identity?.Name
+
+<a class="navbar-brand" asp-area="" asp-controller="WorkoutSession" asp-action="GetWorkoutSessions" asp-route-Id="@UserManager.GetUserId(@User)">Sessions</a>
