@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutTrackerMvc.Core.Models;
+using WorkoutTracker.Core.Models;
 
 namespace WorkoutTracker.Tests.UnitTests.Common.TestData
 {
     public static class CommonTestData
     {
-        public static List<WorkoutSession> workoutSessions;
-        public static List<Exercise> exercises;
-        public static List<string> userIds;
+        public static IList<WorkoutSession> workoutSessions;
+        public static IList<Exercise> exercises;
+        public static IList<string> userIds;
 
 
         static CommonTestData()
@@ -35,7 +35,7 @@ namespace WorkoutTracker.Tests.UnitTests.Common.TestData
         {
             exercises = new List<Exercise>()
             {
-                new Exercise(1, workoutSessions[0].WorkoutSessionId, "PushUps", WorkoutTrackerMvc.Core.Enums.TypeOfExercise.Weigth)
+                new Exercise(1, workoutSessions[0].WorkoutSessionId, "PushUps", WorkoutTracker.Core.Enums.TypeOfExercise.Weigth)
                 {
                     WorkoutSession = workoutSessions[0],
                     Sets = new List<Set>()
@@ -45,7 +45,7 @@ namespace WorkoutTracker.Tests.UnitTests.Common.TestData
                         new Set(8, 16)
                     }
                 },
-                new Exercise(2, workoutSessions[0].WorkoutSessionId, "PullUps", WorkoutTrackerMvc.Core.Enums.TypeOfExercise.Weigth)
+                new Exercise(2, workoutSessions[0].WorkoutSessionId, "PullUps", WorkoutTracker.Core.Enums.TypeOfExercise.Weigth)
                 {
                     WorkoutSession = workoutSessions[0],
                     Sets = new List<Set>()
@@ -54,7 +54,7 @@ namespace WorkoutTracker.Tests.UnitTests.Common.TestData
                         new Set(7, 86)
                     }
                 },
-                new Exercise(1, workoutSessions[2].WorkoutSessionId, "Running", WorkoutTrackerMvc.Core.Enums.TypeOfExercise.Cardio)
+                new Exercise(1, workoutSessions[2].WorkoutSessionId, "Running", WorkoutTracker.Core.Enums.TypeOfExercise.Cardio)
                 {
                     WorkoutSession = workoutSessions[2],
                     Sets = new List<Set>()
@@ -64,9 +64,9 @@ namespace WorkoutTracker.Tests.UnitTests.Common.TestData
                 }
             };
 
-            workoutSessions[0].Exercise.Add(exercises[0]);
-            workoutSessions[0].Exercise.Add(exercises[1]);
-            workoutSessions[2].Exercise.Add(exercises[2]);
+            //workoutSessions[0].Exercise.Add(exercises[0]);
+           // workoutSessions[0].Exercise.Add(exercises[1]);
+           // workoutSessions[2].Exercise.Add(exercises[2]);
         }
 
         public static void CreateWorkoutSessions()

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracker.Tests.UnitTests.Common.TestData;
-using WorkoutTrackerMvc.Application.Interfaces;
+using WorkoutTracker.Application.Interfaces;
 
-namespace WorkoutTracker.Tests.UnitTests.Infrastructure.Mocks
+namespace WorkoutTracker.Tests.UnitTests.Common.Mocks
 {
     internal class MockIExerciseRepository
     {

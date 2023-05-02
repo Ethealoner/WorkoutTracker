@@ -38,6 +38,11 @@ namespace WorkoutTracker.Infrastructure.Repositories
             return _context.Set<T>().Find(id);
         }
 
+        public T GetById(string id)
+        {
+            return _context.Set<T>().Find(id);
+        }
+
         public void Remove(T entity)
         {
             _context.Set<T>().Remove(entity);

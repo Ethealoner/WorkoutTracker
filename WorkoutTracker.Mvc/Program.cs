@@ -7,6 +7,8 @@ using WorkoutTracker.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using WorkoutTracker.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,7 @@ builder.Services.AddTransient<IWorkoutSessionRepository, WorkoutSessionRepositor
 builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddMvc();
+builder.Services.AddApplicationLayer();
 
 
 var app = builder.Build();
