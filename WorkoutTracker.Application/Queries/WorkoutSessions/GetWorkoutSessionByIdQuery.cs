@@ -21,16 +21,16 @@ namespace WorkoutTracker.Application.Queries.WorkoutSessions
 
     public class GetWorkoutSessionByIdQueryHandler : IRequestHandler<GetWorkoutSessionByIdQuery, WorkoutSession>
     {
-        public IWorkoutSessionRepository workoutSessionRepository { get; }
+        public IWorkoutSessionRepository WorkoutSessionRepository { get; }
 
         public GetWorkoutSessionByIdQueryHandler(IWorkoutSessionRepository workoutSessionRepository)
         {
-            this.workoutSessionRepository = workoutSessionRepository;
+            WorkoutSessionRepository = workoutSessionRepository;
         }
 
         public Task<WorkoutSession> Handle(GetWorkoutSessionByIdQuery request, CancellationToken cancellationToken)
         {
-            var workoutSession = workoutSessionRepository.GetById(request.WorkoutSessionId);
+           var workoutSession = WorkoutSessionRepository.GetById(request.WorkoutSessionId);
            return Task.FromResult(workoutSession);
         }
     }

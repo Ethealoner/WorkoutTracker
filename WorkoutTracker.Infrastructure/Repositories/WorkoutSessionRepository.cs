@@ -13,7 +13,12 @@ namespace WorkoutTracker.Infrastructure
         {
         }
 
-        public void UpdateWorkoutSessionAsync(WorkoutSession session)
+        public IEnumerable<WorkoutSession> GetWorkoutSessionsByUserId(string userId)
+        {
+            return _context.sessions.Where(x => x.ApplicationUserId == userId).ToList();
+        }
+
+        public void UpdateWorkoutSession(WorkoutSession session)
         {
             throw new NotImplementedException();
         }

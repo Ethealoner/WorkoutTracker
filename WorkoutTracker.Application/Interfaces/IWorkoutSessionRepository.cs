@@ -4,6 +4,7 @@ namespace WorkoutTracker.Application.Interfaces
 {
     public interface IWorkoutSessionRepository : IGenericRepository<WorkoutSession>
     {
-        void UpdateWorkoutSessionAsync(WorkoutSession session);
+        void UpdateWorkoutSession(WorkoutSession session);
+        IEnumerable<WorkoutSession> GetWorkoutSessionsByUserId(string userId);
     }
 }
