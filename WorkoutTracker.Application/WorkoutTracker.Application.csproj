@@ -15,8 +15,4 @@
     <ProjectReference Include="..\WorkoutTracker.Core\WorkoutTracker.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\WorkoutSessions\" />
-  </ItemGroup>
-
 </Project>

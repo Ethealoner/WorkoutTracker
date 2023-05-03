@@ -1,25 +1,33 @@
-﻿@model IEnumerable<WorkoutSession>
+﻿@using Microsoft.AspNetCore.Identity
+@using WorkoutTrackerMvc.Models.WorkoutSessionViewModels
+
+
+@model WorkoutSessionsWithUserViewModel
 @*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    
 *@
 @{
 }
 
+<a asp-area="" asp-controller="WorkoutSession" asp-action="AddWorkoutSession" asp-route-userId="@Model.UserId">Add new Session</a>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.WorkoutDate)
+                @Html.DisplayNameFor(model => model.workoutSessions.FirstOrDefault().WorkoutDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WorkoutScore)
+                @Html.DisplayNameFor(model => model.workoutSessions.FirstOrDefault().WorkoutScore)
+            </th>
+            <th>
+
             </th>
         </tr>
     </thead>
     <tbody>
         @if(Model is not null)
         {
-        @foreach(var item in Model)
+        @foreach(var item in Model.workoutSessions)
         {
             <tr>
                 <td>
@@ -27,6 +35,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(model => item.WorkoutScore)
+                </td>
+                <td>
+                    <a asp-area="" asp-controller="WorkoutSession" asp-action="DeleteWorkoutSession" asp-route-workoutSessionId="@item.WorkoutSessionId">X</a>
                 </td>
             </tr>
         }

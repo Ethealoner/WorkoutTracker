@@ -15,7 +15,7 @@ namespace WorkoutTracker.Application.Queries.WorkoutSessions
 
     public class GetAllWorkoutSessionsQueryHandler : IRequestHandler<GetAllWorkoutSessionsQuery, IEnumerable<WorkoutSession>>
     {
-        public IWorkoutSessionRepository WorkoutSessionRepository { get; }
+        private readonly IWorkoutSessionRepository WorkoutSessionRepository;
 
         public GetAllWorkoutSessionsQueryHandler(IWorkoutSessionRepository workoutSessionRepository)
         {
