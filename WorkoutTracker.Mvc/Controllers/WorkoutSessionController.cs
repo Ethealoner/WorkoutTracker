@@ -19,10 +19,9 @@ namespace WorkoutTrackerMvc.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult> GetWorkoutSessionsAsync(string Id)
+        public async Task<IActionResult> GetWorkoutSessions(string Id)
         {
-            //var sessions = _unitOfWork.WorkoutSessions.GetAll();
-            var sessions = await _mediator.Send(new GetAllWorkoutSessionsQuery());
+            var sessions = await _mediator.Send(new GetWorkoutSessionsByUserIdQuery(Id));
 
             return View(new WorkoutSessionsWithUserViewModel { UserId = Id, workoutSessions = sessions });
         }
@@ -30,8 +29,6 @@ namespace WorkoutTrackerMvc.Controllers
         public async Task<IActionResult> AddWorkoutSession(string userId)
         {
             WorkoutSession session = new WorkoutSession(Guid.NewGuid().ToString(), 0.0, DateTime.Now, userId);
-            // _unitOfWork.WorkoutSessions.Add(session);
-            // _unitOfWork.Complete();
             await _mediator.Send(new AddWorkoutSessionCommand(session));
 
             return RedirectToAction("GetWorkoutSessions", new { Id = userId });
@@ -39,15 +36,17 @@ namespace WorkoutTrackerMvc.Controllers
 
         public async Task<IActionResult> DeleteWorkoutSession(string workoutSessionId)
         {
-            // WorkoutSession session = _unitOfWork.WorkoutSessions.GetById(workoutSessionId);
-            // _unitOfWork.WorkoutSessions.Remove(session);
-            // _unitOfWork.Complete();
-
             WorkoutSession session = await _mediator.Send(new GetWorkoutSessionByIdQuery(workoutSessionId));
             await _mediator.Send(new DeleteWorkoutSessionCommand(session));
 
             return RedirectToAction("GetWorkoutSessions", new { Id = session.ApplicationUserId });
         }
+
+        public async Task<IActionResult> GoToWorkoutSessionDetail()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();

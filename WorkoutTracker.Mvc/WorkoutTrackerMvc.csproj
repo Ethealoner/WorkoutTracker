@@ -26,4 +26,8 @@
     <ProjectReference Include="..\WorkoutTracker.Infrastructure\WorkoutTracker.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\ExerciseViewModels\" />
+  </ItemGroup>
+
 </Project>

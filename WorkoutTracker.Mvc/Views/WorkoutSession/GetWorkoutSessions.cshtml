@@ -38,6 +38,8 @@
                 </td>
                 <td>
                     <a asp-area="" asp-controller="WorkoutSession" asp-action="DeleteWorkoutSession" asp-route-workoutSessionId="@item.WorkoutSessionId">X</a>
+                    |
+                    <a asp-area="" asp-controller="WorkoutSession" asp-action="GoToWorkoutSessionDetail" asp-route-workoutSession="">Details</a> 
                 </td>
             </tr>
         }
