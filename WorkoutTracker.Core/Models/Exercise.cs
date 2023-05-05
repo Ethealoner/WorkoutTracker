@@ -18,6 +18,10 @@ namespace WorkoutTracker.Core.Models
 
         public virtual WorkoutSession WorkoutSession { get; set; }
 
+        public Exercise()
+        {
+
+        }
         public Exercise(int exerciseId, string workoutSessionId, string name, TypeOfExercise exerciseType)
         {
             ExerciseId = exerciseId;
@@ -43,6 +47,11 @@ namespace WorkoutTracker.Core.Models
         {
             Repetitions = repetitions;
             Difficulty = difficulty;
+        }
+
+        public Set()
+        {
+
         }
     }
 }

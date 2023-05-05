@@ -1,15 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using WorkoutTrackerMvc.Models.WorkoutSessionViewModels
-
+@inject UserManager<ApplicationUser> UserManager
 
 @model WorkoutSessionsWithUserViewModel
-@*
-    
-*@
+
 @{
 }
 
-<a asp-area="" asp-controller="WorkoutSession" asp-action="AddWorkoutSession" asp-route-userId="@Model.UserId">Add new Session</a>
+<a asp-area="" asp-controller="WorkoutSession" asp-action="AddWorkoutSession" asp-route-userId="@UserManager.GetUserId(@User)">Add new Session</a>
 <table class="table">
     <thead>
         <tr>
@@ -39,7 +37,7 @@
                 <td>
                     <a asp-area="" asp-controller="WorkoutSession" asp-action="DeleteWorkoutSession" asp-route-workoutSessionId="@item.WorkoutSessionId">X</a>
                     |
-                    <a asp-area="" asp-controller="WorkoutSession" asp-action="GoToWorkoutSessionDetail" asp-route-workoutSession="">Details</a> 
+                    <a asp-area="" asp-controller="WorkoutSession" asp-action="WorkoutSessionDetail" asp-route-workoutSessionId="@item.WorkoutSessionId">Details</a> 
                 </td>
             </tr>
         }

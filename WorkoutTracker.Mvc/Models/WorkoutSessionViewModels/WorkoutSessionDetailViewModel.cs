@@ -2,10 +2,9 @@
 
 namespace WorkoutTrackerMvc.Models.WorkoutSessionViewModels
 {
-    public class WorkoutSessionDetail
+    public class WorkoutSessionDetailViewModel
     {
         public DateTime date { get; set; }
-        public string userId { get; set; }
         public string workoutSessionId { get; set; }
         public ICollection<Exercise> exercises { get; set; }
     }

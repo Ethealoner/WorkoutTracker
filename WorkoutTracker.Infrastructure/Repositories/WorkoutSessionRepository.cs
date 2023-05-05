@@ -18,6 +18,14 @@ namespace WorkoutTracker.Infrastructure
             return _context.sessions.Where(x => x.ApplicationUserId == userId).ToList();
         }
 
+        public WorkoutSession GetWorkoutSessionWithExercisesById(string workoutSessionId)
+        {
+            return _context.sessions
+                .Where(s => s.WorkoutSessionId == workoutSessionId)
+                .Include(s => s.Exercise)
+                .FirstOrDefault();
+        }
+
         public void UpdateWorkoutSession(WorkoutSession session)
         {
             throw new NotImplementedException();

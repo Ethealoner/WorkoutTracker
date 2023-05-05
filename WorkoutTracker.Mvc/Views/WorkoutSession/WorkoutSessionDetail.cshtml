@@ -1,5 +1,42 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using WorkoutTrackerMvc.Models.WorkoutSessionViewModels
+@model WorkoutSessionDetailViewModel
+
 @{
+    ViewData["Title"] = "Workout Session Details";
 }
+
+<div>
+    Workout Session Details - @Model.date
+</div>
+
+<a asp-area="" asp-controller="Exercise" asp-action="NewExerciseDetail" asp-route-workoutSessionId="@Model.workoutSessionId">Add new Exercise</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.exercises.FirstOrDefault().Name)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model.exercises is not null)
+        {
+        @foreach(var item in Model.exercises)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                </td>
+                <td>
+                    <a asp-area="" asp-controller="Exercise" asp-action="DeleteExercise" asp-route-exerciseId="@item.ExerciseId" asp-route-workoutSessionId="@item.WorkoutSessionId">X</a>
+                    |
+                    <a asp-area="" asp-controller="Exercise" asp-action="ExerciseDetail" asp-route-exerciseId="@item.ExerciseId" asp-route-workoutSessionId="@item.WorkoutSessionId">Details</a> 
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>

@@ -42,9 +42,15 @@ namespace WorkoutTrackerMvc.Controllers
             return RedirectToAction("GetWorkoutSessions", new { Id = session.ApplicationUserId });
         }
 
-        public async Task<IActionResult> GoToWorkoutSessionDetail()
+        public async Task<IActionResult> WorkoutSessionDetail(string workoutSessionId)
         {
-            return View();
+            WorkoutSession session = await _mediator.Send(new GetWorkoutSessionWithExercisesByIdQuery(workoutSessionId));
+            WorkoutSessionDetailViewModel sessionDetail = new WorkoutSessionDetailViewModel() 
+            { date = session.WorkoutDate, 
+              workoutSessionId = session.WorkoutSessionId, 
+              exercises = session.Exercise };
+
+            return View(sessionDetail);
         }
 
         public IActionResult Index()

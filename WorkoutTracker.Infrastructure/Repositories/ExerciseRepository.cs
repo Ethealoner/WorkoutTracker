@@ -14,5 +14,15 @@ namespace WorkoutTracker.Infrastructure.Repositories
         public ExerciseRepository(ApplicationDbContext context) : base(context)
         {
         }
+
+        public Exercise Find(int exerciseId, string workoutSessionId)
+        {
+            return _context.exercises.Find(exerciseId, workoutSessionId);
+        }
+
+        public IEnumerable<Exercise> GetAllExercisesBySessionWorkoutId(string sessionWorkoutId)
+        {
+            return _context.exercises.Where(x => x.WorkoutSessionId == sessionWorkoutId).ToList();
+        }
     }
 }
