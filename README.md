@@ -1,6 +1,7 @@
 # WorkoutTracker
 Workout Tracker App
 [![Build](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackermvc.yml/badge.svg)](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackermvc.yml/badge.svg)
+[![.NET](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/dotnetTests.yml/badge.svg)](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/dotnetTests.yml)
 
 <br/>
 
