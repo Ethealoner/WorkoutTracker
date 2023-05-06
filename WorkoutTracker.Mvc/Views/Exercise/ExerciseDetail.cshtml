@@ -5,7 +5,8 @@
 }
 <br />
 
-<form asp-area="" asp-controller="Exercise" asp-action="NewExerciseDetail" method="Post">
+<form asp-area="" asp-controller="Exercise" asp-action="ExerciseDetail" method="Post">
+    <div asp-validation-summary="All">Please correct the following errors</div>
     <div class="row">
         <div class="col-lg-4">Exercise Name</div>
         <div class="col-lg-8">
@@ -21,6 +22,7 @@
     </div>
     <br />
     <input asp-for="workoutSessionId"  type="hidden"/>
+    <input asp-for="exerciseId" type="hidden" />
     Add new Set:
     <input asp-for="setToAdd.Repetitions"/>
     <input asp-for="setToAdd.Difficulty"/>
@@ -44,15 +46,24 @@
         </div>
         }
     }
-    <button type="submit" class="btn btn-primary">Set rep</button>
+    <button type="submit" class="btn btn-primary">Save changes</button>
 </form>
-
+<br />
 <form asp-area="" asp-controller="Exercise" asp-action="SaveExercise" method="Post">
 
-    <input asp-for="exerciseName" type="hidden"/>
-    <select asp-for="ExerciseType" type="hidden" asp-items="Html.GetEnumSelectList<WorkoutTracker.Core.Enums.TypeOfExercise>()" ></select>
+    <input asp-for="exerciseName" type="hidden" />
+    <input asp-for="ExerciseType" type="hidden" />
     <input asp-for="workoutSessionId" type="hidden" />
-    <input asp-for="sets" type="hidden" />
+    <input asp-for="setToAdd" type="hidden" />
+    <input asp-for="exerciseId" type="hidden" />
+    @if(Model.sets is not null)
+    {
+        @for(var i = 0; i < Model.sets.Count; i++)
+        {
+            <input asp-for="@Model.sets[i].Repetitions" type="hidden">
+            <input asp-for="@Model.sets[i].Difficulty" type="hidden">
+        }
+    }
     <button type="submit" class="btn btn-primary">Save exercise</button>
 </form>
 

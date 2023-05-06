@@ -9,7 +9,7 @@
     Workout Session Details - @Model.date
 </div>
 
-<a asp-area="" asp-controller="Exercise" asp-action="NewExerciseDetail" asp-route-workoutSessionId="@Model.workoutSessionId">Add new Exercise</a>
+<a asp-area="" asp-controller="Exercise" asp-action="ExerciseDetail" asp-route-workoutSessionId="@Model.workoutSessionId">Add new Exercise</a>
 
 <table class="table">
     <thead>
@@ -33,7 +33,7 @@
                 <td>
                     <a asp-area="" asp-controller="Exercise" asp-action="DeleteExercise" asp-route-exerciseId="@item.ExerciseId" asp-route-workoutSessionId="@item.WorkoutSessionId">X</a>
                     |
-                    <a asp-area="" asp-controller="Exercise" asp-action="ExerciseDetail" asp-route-exerciseId="@item.ExerciseId" asp-route-workoutSessionId="@item.WorkoutSessionId">Details</a> 
+                    <a asp-area="" asp-controller="Exercise" asp-action="EditExerciseDetail" asp-route-exerciseId="@item.ExerciseId" asp-route-workoutSessionId="@item.WorkoutSessionId">Details</a> 
                 </td>
             </tr>
         }
