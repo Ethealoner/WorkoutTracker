@@ -33,7 +33,7 @@ builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddMvc();
 builder.Services.AddApplicationLayer();
-
+builder.Services.AddAuthConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
@@ -51,6 +51,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 
 app.UseRouting();
 
