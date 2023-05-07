@@ -1,18 +1,116 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.action-section{
+    text-align: right;
+}
+
+.button-success {
+    background-color: green;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 10px;
+    color: white;
+}
+
+.button-save {
+    background-color: #0095ff;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 10px;
+    color: white;
+}
+
+.button-success:hover {
+    background-color: darkgreen;
+}
+
+.workout-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.workout-container-button-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.set-box {
+    width: 320px;
+    padding: 10px;
+    border: 5px solid gray;
+    margin: 0;
+}
+
+.exercise-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.exercise-container-button-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.dropbtn {
+    background-color: #0095ff;
+    color: white;
+    padding: 0.5rem;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 80px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 6px 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: grey;
+    color: white;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #005999;
 }

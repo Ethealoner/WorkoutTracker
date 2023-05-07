@@ -23,9 +23,9 @@ namespace WorkoutTrackerMvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult ExerciseDetail(string workoutSessionId)
+        public IActionResult ExerciseDetail(string Id)
         {
-            CreateExerciseViewModel createExerciseViewModel = new CreateExerciseViewModel() { workoutSessionId = workoutSessionId};
+            CreateExerciseViewModel createExerciseViewModel = new CreateExerciseViewModel() { workoutSessionId = Id};
             return View(createExerciseViewModel);
         }
 

@@ -26,6 +26,7 @@ namespace WorkoutTrackerMvc.Controllers
             return View(new WorkoutSessionsWithUserViewModel { UserId = Id, workoutSessions = sessions });
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddWorkoutSession(string userId)
         {
             WorkoutSession session = new WorkoutSession(Guid.NewGuid().ToString(), 0.0, DateTime.Now, userId);
