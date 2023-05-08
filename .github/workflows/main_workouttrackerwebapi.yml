@@ -1,10 +1,16 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.net Core Web API to Azure - WorkoutTrackerApi
+name: Build/Deploy Web API
 
 on:
   push:
+    paths:
+      - 'WorkoutTracker.Core/**'
+      - 'WorkoutTracker.Application/**'
+      - 'WorkoutTracker.Infrastructure/**'
+      - 'WorkoutTracker.Tests/**'
+      - 'WorkoutTracker.WebAPI/**'
     branches:
       - main
   workflow_dispatch:

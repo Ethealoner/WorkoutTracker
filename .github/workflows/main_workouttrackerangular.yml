@@ -5,6 +5,8 @@ name: Build/Deploy Angular
 
 on:
   push:
+    paths:
+      - 'WorkoutTracker.Angular/**'
     branches:
       - main
   workflow_dispatch:
@@ -31,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: .\WorkoutTracker.Angular\
 
   deploy:
     runs-on: windows-latest
