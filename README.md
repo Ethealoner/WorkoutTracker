@@ -19,6 +19,12 @@ This is a solution for creating SPA with ASP.NET Core MVC (in future also Angula
 * XUnit
 * Azure
 
+## Patterns Used
+
+* Clean Architecture
+* Repository pattern with Unit of Work pattern
+* CQRS - with MediatR
+
 ### Database Configuration
 
 This solution uses Microsoft SQL Server. Add migration from root folder:
