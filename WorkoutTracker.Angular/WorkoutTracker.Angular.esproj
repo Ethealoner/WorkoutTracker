@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.26-alpha">
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.26-alpha">
   <PropertyGroup Label="Globals">
     <ProjectGuid>b0481d94-c363-4dba-81ee-9e995cc01e4d</ProjectGuid>
   </PropertyGroup>
@@ -9,4 +9,7 @@
   <ItemGroup>
     <Folder Include="src\app\Services\" />
   </ItemGroup>
+  <Target Name="VSTest" >
+    <Message Text="No tests because this is a angular project" />
+  </Target>
 </Project>
