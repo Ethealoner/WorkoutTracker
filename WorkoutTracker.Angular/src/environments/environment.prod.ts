@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseApiUrl: "https://localhost:7250/"
+  baseApiUrl: "https://workouttrackerwebapi.azurewebsites.net/"
 };

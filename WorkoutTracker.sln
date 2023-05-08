@@ -14,6 +14,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutTrackerMvc", "WorkoutTracker.Mvc\WorkoutTrackerMvc.csproj", "{5FB5E622-4A79-480C-B813-D74C1F2B8983}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutTracker.WebAPI", "WorkoutTracker.WebAPI\WorkoutTracker.WebAPI.csproj", "{4E9A606A-295A-40AC-BDFE-53F1C38A5920}"
+	ProjectSection(ProjectDependencies) = postProject
+		{72437CAB-13AC-4175-8E75-52AEE6A879BB} = {72437CAB-13AC-4175-8E75-52AEE6A879BB}
+		{8EED964D-671C-41B1-889D-306DBCED22E8} = {8EED964D-671C-41B1-889D-306DBCED22E8}
+	EndProjectSection
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "WorkoutTracker.Angular", "WorkoutTracker.Angular\WorkoutTracker.Angular.esproj", "{B0481D94-C363-4DBA-81EE-9E995CC01E4D}"
 EndProject

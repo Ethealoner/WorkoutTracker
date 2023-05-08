@@ -13,7 +13,7 @@ export class AuthService {
   baseApiUrl: string = environment.baseApiUrl;
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     })
   };
 

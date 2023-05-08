@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/ea6b4dae-c95a-4ea6-b3d8-1955930d681a/resourceGroups/WorkoutTrackerResourceGroup/providers/Microsoft.Web/sites/WorkoutTrackerAngular",
+    "appService.deploySubpath": "dist\\workout-tracker.angular"
+}
