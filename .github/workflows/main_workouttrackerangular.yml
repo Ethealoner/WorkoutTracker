@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .\WorkoutTracker.Angular\
+          path: .\WorkoutTracker.Angular\dist\
 
   deploy:
     runs-on: windows-latest
