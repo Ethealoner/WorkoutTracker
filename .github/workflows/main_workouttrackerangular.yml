@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - WorkoutTrackerAngular
+name: Build/Deploy Angular
 
 on:
   push:
@@ -23,9 +23,9 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm install .\WorkoutTracker.Angular\
+          npm run build .\WorkoutTracker.Angular\ --if-present
+          npm run test .\WorkoutTracker.Angular\ --if-present
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -34,10 +34,10 @@ jobs:
           path: .
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -51,6 +51,6 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'WorkoutTrackerAngular'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8D98E8B115E149C8803ADDB01C187120 }}
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_e34a274c15cf4bfab25bfde7db2bbe8a }}
           package: .
