@@ -25,9 +25,9 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install .\WorkoutTracker.Angular\
-          npm run build .\WorkoutTracker.Angular\ --if-present
-          npm run test .\WorkoutTracker.Angular\ --if-present
+          npm install --prefix .\WorkoutTracker.Angular\
+          npm run build --prefix .\WorkoutTracker.Angular\ --if-present
+          npm run test --prefix .\WorkoutTracker.Angular\ --if-present
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
