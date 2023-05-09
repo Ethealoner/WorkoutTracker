@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "workout-tracker.angular": "file:WorkoutTracker.Angular"
-  }
-}

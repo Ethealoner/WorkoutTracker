@@ -1,12 +1,42 @@
-<div class="LoginContainer">
-  <form #loginForm="ngForm" (ngSubmit)="LoginUser(loginForm)">
-    <h2>Login</h2>
-    <div *ngIf="invalidLogin">Invalid username or password</div>
-    <label>User name:</label>
-    <input type="text" id="userName" [(ngModel)]="credentials.userName" name="userName" placeholder="UserName" required />
-    <br />
-    <label>Password</label>
-    <input type="password" name="password" [(ngModel)]="credentials.password" placeholder="password" required />
-    <button type="submit" [disabled]="!loginForm.valid">Log in</button>
-  </form>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">Login</h1>
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
+
+    <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="LoginUser(loginForm)">
+      <div class="mb-3 row">
+        <label for="username" class="col-form-label col-sm-2">Username:</label>
+        <div class="col-md-5">
+          <input type="text" id="userName" formControlName="userName" class="form-control" />
+        </div>
+        <div class="col-md-5">
+          <em *ngIf="validateControl('userName') && hasError('userName', 'required')">Username is required</em>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="password" class="col-form-label col-sm-2">Password:</label>
+        <div class="col-md-5">
+          <input type="password" id="password" formControlName="password" class="form-control" />
+        </div>
+        <div class="col-md-5">
+          <em *ngIf="validateControl('password') && hasError('password', 'required')">Password is required</em>
+        </div>
+      </div>
+      <br>
+      <div class="mb-3 row">
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-info" [disabled]="!loginForm.valid">Login</button>
+        </div>
+      </div>
+    </form>
+    <hr>
+    <div>
+      <h2>External Providers</h2>
+      <div style="padding: 20px;">
+        <asl-google-signin-button type='icon' size='large'></asl-google-signin-button>
+      </div>
+    </div>
+  </div>
 </div>

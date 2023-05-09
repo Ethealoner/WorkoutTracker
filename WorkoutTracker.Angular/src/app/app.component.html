@@ -1,18 +1,33 @@
-<p>This component demonstrates fetching data from the server.</p>
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button type="button" class="logout" (click)="logout()">Logout</button>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="workoutSession">Workout Sessions</a>
-        </li>
-      </ul>
-    </div>
+<div class="row">
+  <div class="col">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Workout Tracker</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNav"
+                aria-controls="collapseNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapseNav">
+          <ul *ngIf='!isUserAuthenticated' class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="login">Login</a>
+            </li>
+          </ul>
+          <ul *ngIf='isUserAuthenticated' class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="workoutSession">Workout Sessions</a>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-link" style="color: #ffffff80;" (click)="logout()" >Logout</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
+</div>
+
 <router-outlet></router-outlet>

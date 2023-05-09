@@ -1,10 +1,12 @@
 # Workout Tracker App
 [![Build](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackermvc.yml/badge.svg)](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackermvc.yml/badge.svg)
+[![Build](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackerwebapi.yml/badge.svg)](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackerwebapi.yml/badge.svg)
+[![Build](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackerangular.yml/badge.svg)](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/main_workouttrackerangular.yml/badge.svg)
 [![.NET](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/dotnetTests.yml/badge.svg)](https://github.com/Ethealoner/WorkoutTracker/actions/workflows/dotnetTests.yml)
 
 <br/>
 
-This is a solution for creating SPA with ASP.NET Core MVC (in future also Angular), following the principles of Clean Architecture.
+This is a solution for creating SPA with ASP.NET Core MVC/Angular, following the principles of Clean Architecture.
 
 ## Demo
 
@@ -13,6 +15,7 @@ This is a solution for creating SPA with ASP.NET Core MVC (in future also Angula
 ## Technologies Used
 
 * ASP.NET Core
+* Angular
 * Entity Framework Core
 * MediatR
 * FluentAPI

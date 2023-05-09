@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Google.Apis.Auth;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -17,12 +18,14 @@ namespace WorkoutTracker.WebAPI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly JwtHandler _jwtHandler;
 
         public AuthenticateController(IConfiguration configuration, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
+            _jwtHandler = new JwtHandler(_configuration);
         }
 
         [HttpPost]
@@ -38,7 +41,7 @@ namespace WorkoutTracker.WebAPI.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
-                var token = GetToken(authClaims);
+                var token = _jwtHandler.GetToken(authClaims);
 
                 return Ok(new
                 {
@@ -46,16 +49,13 @@ namespace WorkoutTracker.WebAPI.Controllers
                 });
             }
 
-            return Unauthorized();
+            return Unauthorized( new { errorMessage = "Invalid Authentication" });
         }
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] LoginModel model)
+        public async Task<IActionResult> Register([FromBody] UserRegistrationModel model)
         {
-            var userExists = await _userManager.FindByNameAsync(model.UserName);
-            if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists! " });
 
             ApplicationUser user = new ApplicationUser()
             {
@@ -66,24 +66,64 @@ namespace WorkoutTracker.WebAPI.Controllers
 
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "Failed to create a user!" });
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(errors);
+            }
 
             return Ok(new { Status = "Success", Message = "User created succesfully" });
         }
 
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
+        [HttpPost]
+        [Route("externallogin")]
+        public async Task<IActionResult> ExternalLogin([FromBody] ExternalLoginModel model)
         {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
+            var payload = await _jwtHandler.VerifyGoogleToken(model.IdToken);
+            if (payload == null)
+                return BadRequest("Invalid External Authentication. ");
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                expires: DateTime.Now.AddHours(1),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
+            var info = new UserLoginInfo(model.Provider, payload.Subject, model.Provider);
 
-            return token;
+            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+
+            if (user == null)
+            {
+                user = await _userManager.FindByEmailAsync(payload.Email);
+
+                if (user == null)
+                {
+                    user = new ApplicationUser()
+                    {
+                        Email = payload.Email,
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        UserName = payload.Email
+                    };
+
+                    await _userManager.CreateAsync(user);
+
+                    await _userManager.AddLoginAsync(user, info);
+                }
+                else
+                {
+                    await _userManager.AddLoginAsync(user, info);
+                }
+            }
+
+            if (user == null)
+                return BadRequest("Invalid External Authentiation");
+
+            var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+            var token = _jwtHandler.GetToken(authClaims);
+
+            return Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token)
+            });
         }
     }
 }
