@@ -11,7 +11,7 @@ This is a solution for creating SPA with ASP.NET Core MVC/Angular, following the
 ## Demo
 
 * [Workout Tracker App MVC](https://workouttrackermvc20230504155820.azurewebsites.net)
-* [Workout Tracker App Angular] (https://workouttrackerangular.azurewebsites.net)
+* [Workout Tracker App Angular](https://workouttrackerangular.azurewebsites.net)
 
 ## Technologies Used
 
