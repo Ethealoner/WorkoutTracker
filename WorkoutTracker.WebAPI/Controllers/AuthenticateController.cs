@@ -96,7 +96,8 @@ namespace WorkoutTracker.WebAPI.Controllers
                     {
                         Email = payload.Email,
                         SecurityStamp = Guid.NewGuid().ToString(),
-                        UserName = payload.Email
+                        UserName = payload.Email,
+                        EmailConfirmed = true
                     };
 
                     await _userManager.CreateAsync(user);
