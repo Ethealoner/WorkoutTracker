@@ -3,25 +3,36 @@
   <div *ngIf="showError" class="alert alert-danger" role="alert">
     {{errorMessage}}
   </div>
-  <table class="table" *ngIf="workoutSessions && workoutSessions.length > 0">
-    <thead>
-      <tr>
-        <th>Workout Score</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-      <tr *ngFor="let workoutSession of workoutSessions">
-        <td>{{workoutSession.workoutScore}}</td>
-        <td>{{workoutSession.workoutDate}}</td>
-        <td><input class='myclass' type='button' routerLink="/workoutSessionDetail/{{workoutSession.workoutSessionId}}" value='Go to workout session' /></td>
-        <td><button type="button" class="delete-button" (click)="deleteWorkoutSession(workoutSession.workoutSessionId)">X</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="button" class="add-button" (click)="addWorkoutSession()">
-    Add workout session
-  </button>
-  <p *ngIf="!workoutSessions || workoutSessions.length <= 0">No workout sessions found</p>
+  <div class="workout-container">
+    <div class="workout-container-button-section">
+      <button type="submit" class="button-success" (click)="addWorkoutSession()">
+        <i-feather name="plus-circle"></i-feather> New session
+      </button>
+    </div>
+    <table class="table" *ngIf="workoutSessions && workoutSessions.length > 0">
+      <thead>
+        <tr>
+          <th>Workout Score</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <tr *ngFor="let workoutSession of workoutSessions">
+          <td>{{workoutSession.workoutScore}}</td>
+          <td>{{workoutSession.workoutDate}}</td>
+          <td class="action-section">
+            <div class="dropdown">
+              <button class="dropbtn">Actions <i-feather name="chevron-down"></i-feather></button>
+              <div class="dropdown-content">
+                <a routerLink="/workoutSessionDetail/{{workoutSession.workoutSessionId}}">Details</a>
+                <button type="button" class="inside-btn" (click)="deleteWorkoutSession(workoutSession.workoutSessionId)">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="!workoutSessions || workoutSessions.length <= 0">No workout sessions found</p>
+  </div>
 </div>

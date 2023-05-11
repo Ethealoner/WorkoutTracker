@@ -9,12 +9,20 @@ import { WorkoutSessionComponent } from './Components/workout-session/workout-se
 import { RegisterComponent } from './Components/register/register.component';
 import { ErrorHandlerService } from './Services/error-handler.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { WorkoutSessionDetailsComponent } from './Components/workout-session-details/workout-session-details.component';
 import { ExerciseComponent } from './Components/Exercise/exercise.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { IconsModule } from './icons/icons.module';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -27,7 +35,7 @@ export function tokenGetter() {
     WorkoutSessionComponent,
     RegisterComponent,
     WorkoutSessionDetailsComponent,
-    ExerciseComponent
+    ExerciseComponent,
   ],
   imports: [
     BrowserModule, RouterModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, SocialLoginModule,
@@ -38,6 +46,14 @@ export function tokenGetter() {
         disallowedRoutes: []
       }
     }),
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    IconsModule,
   ],
   providers: [AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerService, multi: true },

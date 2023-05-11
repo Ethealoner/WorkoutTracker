@@ -1,26 +1,37 @@
 <div *ngIf="workoutSessionDetails">
-  <h2>Workout Session</h2>
+  <h2>Workout Session Details</h2>
   <div *ngIf="showError" class="alert alert-danger" role="alert">
     {{errorMessage}}
   </div>
-  <button type="button" class="add-button" (click)="AddExercies()">
-    Add exercise
-  </button>
-  <div>Date: {{workoutSessionDetails.createdAt}}</div>
-  <div *ngIf="workoutSessionDetails!.exerciseSummaries && workoutSessionDetails!.exerciseSummaries.length > 0">
-    <thead>
-      <tr>
-        <th>Exercise name</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let exercise of workoutSessionDetails.exerciseSummaries">
-        <td>{{exercise.exerciseName | uppercase}}</td>
-        <td><button type="button" class="add-button" (click)="EditExercise(exercise.exerciseId)">Edit</button></td>
-        <td><button type="button" class="add-button" (click)="DeleteExercise(exercise.exerciseId)">Delete</button></td>
-      </tr>
-    </tbody>
+  <div class="workout-container">
+    <div>Date: {{workoutSessionDetails.createdAt}}</div>
+    <div class="workout-container-button-section">
+      <button type="submit" class="button-success" (click)="AddExercies()">
+        <i-feather name="plus-circle"></i-feather> New Exercise
+      </button>
+    </div>
+    <table class="table" *ngIf="workoutSessionDetails!.exerciseSummaries && workoutSessionDetails!.exerciseSummaries.length > 0">
+      <thead>
+        <tr>
+          <th>Exercise name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exercise of workoutSessionDetails.exerciseSummaries">
+          <td>{{exercise.exerciseName | uppercase}}</td>
+          <td class="action-section">
+            <div class="dropdown">
+              <button class="dropbtn">Actions <i-feather name="chevron-down"></i-feather></button>
+              <div class="dropdown-content">
+                <button type="button" class="inside-btn" (click)="EditExercise(exercise.exerciseId)">Edit</button>
+                <button type="button" class="inside-btn" (click)="DeleteExercise(exercise.exerciseId)">Delete</button>
+              </div>
+             </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

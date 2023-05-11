@@ -3,36 +3,58 @@
     {{errorMessage}}
   </div>
   <h2>{{exercise.exerciseName | uppercase}}</h2>
-  <div>Type of exercise: {{exercise.typeOfExercise}}</div>
-  <div>Repetition: {{exercise.repetitions}}</div>
-  <div>exerciseId: {{exercise.exerciseId}}</div>
-
-
-  <h2>Change exercise</h2>
-  <div>
-    <label for="exericse-exerciseName">Exercise Name: </label>
-    <input id="exercise-exerciseName" [(ngModel)]="exercise.exerciseName" placeholder="exercise name" />
-    <label for="exercise-typeOfExercise">Type of exercise</label>
-    <select [formControl]="exerciseTypesForms">
-      <option *ngFor="let type of getExerciseTypes(exerciseTypes)" [value]="type" [selected]="type">{{type}}</option>
-    </select>
-  </div>
-  <div [formGroup]="exerciseRepetitionForms">
-    <div formArrayName="reps">
-      <h2>Exercise Reps:</h2>
-      <button type="button" (click)="addExerciseRep()"> Add another rep</button>
-
-      <div *ngFor="let rep of reps.controls; let i=index" [formGroupName]="i">
-        {{exerciseTypeLabel1}}:
-        <input id="rep-{{ i }}" type="number" min=1 formControlName="Repetitions" numbersOnly />
-        / {{exerciseTypeLabel2}}:
-        <input id="weight-{{ i }}" type="number" min=0 formControlName="Difficulty" numbersOnly />
-        {{exerciseTypeLabel3}}
-        <button type="button" (click)="removeExerciseRep(i)">X</button>
+  <div class="exercise-container">
+    <div class="row">
+      <div class="col-lg-4">Exercise Name</div>
+      <div class="col-lg-8">
+        <input class="form-control" id="exercise-exerciseName" autocomplete="on" [(ngModel)]="exercise.exerciseName" placeholder="exercise name" />
       </div>
     </div>
-    <button type="button" (click)="save()">save</button>
-    <button type="button" class="add-button" (click)="goBack()">Go back</button>
+    <br />
+    <div class="row">
+      <div class="col-lg-4">Exercise Type</div>
+      <div class="col-lg-8">
+        <select class="form-control" [formControl]="exerciseTypesForms">
+          <option *ngFor="let type of getExerciseTypes(exerciseTypes)" [value]="type" [selected]="type">{{type}}</option>
+        </select>
+      </div>
+    </div>
+    <br />
+    <div><button type="button" class="button-save" (click)="addExerciseRep()"><i-feather name="plus-circle"></i-feather> Add set</button></div>
+    <br />
   </div>
-</div>
+
+
+  <div class="exercise-container" [formGroup]="exerciseRepetitionForms">
+    <div formArrayName="reps">
+      <h2>Exercise Sets:</h2>
+
+      <div *ngFor="let rep of reps.controls; let i=index" [formGroupName]="i">
+        <div class="set-box">
+          <div class="row">
+            <div class="col-lg-4">{{exerciseTypeLabel1}}:</div>
+            <div class="col-lg-8">
+              <input id="rep-{{ i }}" type="number" min=1 formControlName="Repetitions" numbersOnly />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">{{exerciseTypeLabel2}}:</div>
+            <div class="col-lg-8">
+              <input id="weight-{{ i }}" type="number" min=0 formControlName="Difficulty" numbersOnly />
+            </div>
+          </div>
+          <div class="exercise-container-button-delete">
+            <button class="button-delete" type="button" (click)="removeExerciseRep(i)"><i-feather name="delete"></i-feather> Delete set</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div>
+      <button class="button-save" type="button" (click)="save()"><i-feather name="save"></i-feather> Save Exercise</button>
+    </div>
+    <br />
+    <div><button type="button" class="button-save" (click)="goBack()">Go back</button></div>
+  </div>
+  </div>
 

@@ -1,33 +1,38 @@
-<div class="row">
-  <div class="col">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Workout Tracker</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNav"
-                aria-controls="collapseNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapseNav">
-          <ul *ngIf='!isUserAuthenticated' class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="register">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="login">Login</a>
-            </li>
-          </ul>
-          <ul *ngIf='isUserAuthenticated' class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="workoutSession">Workout Sessions</a>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-link" style="color: #ffffff80;" (click)="logout()" >Logout</button>
-            </li>
-          </ul>
+<header>
+  <mat-sidenav-container class="sidenav-container" [autosize]="true">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-nav-list>
+        <div *ngIf='!isUserAuthenticated'>
+          <a mat-list-item routerLink="login">Login</a>
+          <a mat-list-item routerLink="register">Register</a>
         </div>
-      </div>
-    </nav>
-  </div>
-</div>
+        <div *ngIf='isUserAuthenticated'>
+          <a mat-list-item routerLink="workoutSession">Workout Sessions</a>
+          <button mat-list-item (click)="logout()">Logout</button>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button type="button"
+                aria-label="Toggle sidenav"
+                mat-icon-button
+                (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>WorkoutTracker</span>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</header>
 
-<router-outlet></router-outlet>
+
+
+
+

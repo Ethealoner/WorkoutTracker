@@ -115,9 +115,10 @@ export class ExerciseComponent implements OnInit {
         exerciseName: 'New Exercise',
         workoutSessionId: this.workoutSessionKey,
         exerciseId: 0,
-        typeOfExercise: TypeOfExercise.Weigth,
+        typeOfExercise: TypeOfExercise.Cardio,
         repetitions: '',
       }
+      this.setExerciseLabels();
     }
 
   }
@@ -130,7 +131,7 @@ export class ExerciseComponent implements OnInit {
         this.exerciseTypeLabel3 = "KG";
       } else {
         this.exerciseTypeLabel1 = "Distance(M)";
-        this.exerciseTypeLabel2 = "time";
+        this.exerciseTypeLabel2 = "Time";
         this.exerciseTypeLabel3 = "MIN";
       }
     }
