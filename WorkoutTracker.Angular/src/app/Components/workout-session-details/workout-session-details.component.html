@@ -1,0 +1,26 @@
+<div *ngIf="workoutSessionDetails">
+  <h2>Workout Session</h2>
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+  <button type="button" class="add-button" (click)="AddExercies()">
+    Add exercise
+  </button>
+  <div>Date: {{workoutSessionDetails.createdAt}}</div>
+  <div *ngIf="workoutSessionDetails!.exerciseSummaries && workoutSessionDetails!.exerciseSummaries.length > 0">
+    <thead>
+      <tr>
+        <th>Exercise name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exercise of workoutSessionDetails.exerciseSummaries">
+        <td>{{exercise.exerciseName | uppercase}}</td>
+        <td><button type="button" class="add-button" (click)="EditExercise(exercise.exerciseId)">Edit</button></td>
+        <td><button type="button" class="add-button" (click)="DeleteExercise(exercise.exerciseId)">Delete</button></td>
+      </tr>
+    </tbody>
+  </div>
+</div>
+

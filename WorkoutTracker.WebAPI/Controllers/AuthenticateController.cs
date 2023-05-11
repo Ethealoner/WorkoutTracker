@@ -37,7 +37,8 @@ namespace WorkoutTracker.WebAPI.Controllers
             {
                 var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                    new Claim(JwtRegisteredClaimNames.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
@@ -80,7 +81,7 @@ namespace WorkoutTracker.WebAPI.Controllers
         {
             var payload = await _jwtHandler.VerifyGoogleToken(model.IdToken);
             if (payload == null)
-                return BadRequest("Invalid External Authentication. ");
+                return BadRequest("Invalid External Authentication.");
 
             var info = new UserLoginInfo(model.Provider, payload.Subject, model.Provider);
 
@@ -115,7 +116,8 @@ namespace WorkoutTracker.WebAPI.Controllers
 
             var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 

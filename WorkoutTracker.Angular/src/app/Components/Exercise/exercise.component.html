@@ -1,0 +1,38 @@
+<div *ngIf="exercise">
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+  <h2>{{exercise.exerciseName | uppercase}}</h2>
+  <div>Type of exercise: {{exercise.typeOfExercise}}</div>
+  <div>Repetition: {{exercise.repetitions}}</div>
+  <div>exerciseId: {{exercise.exerciseId}}</div>
+
+
+  <h2>Change exercise</h2>
+  <div>
+    <label for="exericse-exerciseName">Exercise Name: </label>
+    <input id="exercise-exerciseName" [(ngModel)]="exercise.exerciseName" placeholder="exercise name" />
+    <label for="exercise-typeOfExercise">Type of exercise</label>
+    <select [formControl]="exerciseTypesForms">
+      <option *ngFor="let type of getExerciseTypes(exerciseTypes)" [value]="type" [selected]="type">{{type}}</option>
+    </select>
+  </div>
+  <div [formGroup]="exerciseRepetitionForms">
+    <div formArrayName="reps">
+      <h2>Exercise Reps:</h2>
+      <button type="button" (click)="addExerciseRep()"> Add another rep</button>
+
+      <div *ngFor="let rep of reps.controls; let i=index" [formGroupName]="i">
+        {{exerciseTypeLabel1}}:
+        <input id="rep-{{ i }}" type="number" min=1 formControlName="Repetitions" numbersOnly />
+        / {{exerciseTypeLabel2}}:
+        <input id="weight-{{ i }}" type="number" min=0 formControlName="Difficulty" numbersOnly />
+        {{exerciseTypeLabel3}}
+        <button type="button" (click)="removeExerciseRep(i)">X</button>
+      </div>
+    </div>
+    <button type="button" (click)="save()">save</button>
+    <button type="button" class="add-button" (click)="goBack()">Go back</button>
+  </div>
+</div>
+

@@ -4,8 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
+using WorkoutTracker.Application.Extensions;
+using WorkoutTracker.Application.Interfaces;
+using WorkoutTracker.Infrastructure;
 using WorkoutTracker.Infrastructure.Identity;
 using WorkoutTracker.Infrastructure.Persistance;
+using WorkoutTracker.Infrastructure.Repositories;
+using WorkoutTracker.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +26,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 builder.Services.AddJwtConfiguration(builder.Configuration);
 
 builder.Services.AddControllers();
-
+builder.Services.AddDatabaseLayer();
+builder.Services.AddApplicationLayer();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {

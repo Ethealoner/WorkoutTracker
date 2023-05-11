@@ -1,1 +1,27 @@
-<p>workout-session works!</p>
+<div class="container my-5">
+  <h1 class="mb-3">Workout Sessions</h1>
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+  <table class="table" *ngIf="workoutSessions && workoutSessions.length > 0">
+    <thead>
+      <tr>
+        <th>Workout Score</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <tr *ngFor="let workoutSession of workoutSessions">
+        <td>{{workoutSession.workoutScore}}</td>
+        <td>{{workoutSession.workoutDate}}</td>
+        <td><input class='myclass' type='button' routerLink="/workoutSessionDetail/{{workoutSession.workoutSessionId}}" value='Go to workout session' /></td>
+        <td><button type="button" class="delete-button" (click)="deleteWorkoutSession(workoutSession.workoutSessionId)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="add-button" (click)="addWorkoutSession()">
+    Add workout session
+  </button>
+  <p *ngIf="!workoutSessions || workoutSessions.length <= 0">No workout sessions found</p>
+</div>

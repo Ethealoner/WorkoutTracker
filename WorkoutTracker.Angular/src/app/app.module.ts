@@ -12,6 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { WorkoutSessionDetailsComponent } from './Components/workout-session-details/workout-session-details.component';
+import { ExerciseComponent } from './Components/Exercise/exercise.component';
 
 
 export function tokenGetter() {
@@ -23,7 +25,9 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     WorkoutSessionComponent,
-    RegisterComponent
+    RegisterComponent,
+    WorkoutSessionDetailsComponent,
+    ExerciseComponent
   ],
   imports: [
     BrowserModule, RouterModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, SocialLoginModule,

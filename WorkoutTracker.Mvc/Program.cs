@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using WorkoutTracker.Application.Extensions;
+using WorkoutTracker.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,11 +28,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddTransient<IWorkoutSessionRepository, WorkoutSessionRepository>();
-builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddMvc();
+builder.Services.AddDatabaseLayer();
 builder.Services.AddApplicationLayer();
 builder.Services.AddAuthConfiguration(builder.Configuration);
 
