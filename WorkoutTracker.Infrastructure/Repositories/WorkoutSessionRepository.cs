@@ -30,5 +30,15 @@ namespace WorkoutTracker.Infrastructure
         {
             throw new NotImplementedException();
         }
+
+        public bool UpdateWorkoutSessionScore(float score, string workoutSessionId)
+        {
+            var workoutSession = _context.sessions.FirstOrDefault(s => s.WorkoutSessionId == workoutSessionId);
+            if (workoutSession == null)
+                return false;
+
+            workoutSession.WorkoutScore += score;
+            return true;
+        }
     }
 }

@@ -29,9 +29,7 @@ namespace WorkoutTracker.Application.Commands.WorkoutSessions
 
         public Task<bool> Handle(DeleteWorkoutSessionCommand request, CancellationToken cancellationToken)
         {
-            unitOfWork.WorkoutSessions.Remove(request.workoutSession);
-
-            return Task.FromResult(unitOfWork.Complete() > 0 ? true : false);
+            return Task.FromResult(unitOfWork.DeleteWorkoutSession(request.workoutSession));
         }
     }
 }

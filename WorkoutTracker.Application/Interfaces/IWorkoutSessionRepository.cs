@@ -7,5 +7,6 @@ namespace WorkoutTracker.Application.Interfaces
         void UpdateWorkoutSession(WorkoutSession session);
         IEnumerable<WorkoutSession> GetWorkoutSessionsByUserId(string userId);
         WorkoutSession GetWorkoutSessionWithExercisesById(string workoutSessionId);
+        bool UpdateWorkoutSessionScore(float score, string workoutSessionId);
     }
 }

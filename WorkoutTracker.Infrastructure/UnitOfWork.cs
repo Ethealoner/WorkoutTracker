@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracker.Application.Interfaces;
+using WorkoutTracker.Core.Enums;
+using WorkoutTracker.Core.Models;
 using WorkoutTracker.Infrastructure.Persistance;
 using WorkoutTracker.Infrastructure.Repositories;
 
@@ -31,6 +33,92 @@ namespace WorkoutTracker.Infrastructure
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        public bool DeleteExercise(Exercise exercise)
+        {
+            exercise.Sets.Clear();
+
+            if (CalculateWorkoutSessionScore(exercise, true) == false)
+                return false;
+
+            Exercises.Remove(exercise);
+
+            return Complete() > 0 ? true : false;
+        }
+
+        public bool AddExercise(Exercise exercise)
+        {
+            if (CalculateWorkoutSessionScore(exercise, false) == false)
+                return false;
+
+            Exercises.Add(exercise);
+
+            return Complete() > 0 ? true : false;
+        }
+
+        public bool UpdateExercise(Exercise exercise)
+        {
+            if (CalculateWorkoutSessionScore(exercise, true) == false)
+                return false;
+
+            if (Exercises.UpdateExercise(exercise) == false)
+                return false;
+
+            return Complete() > 0 ? true : false;
+        }
+
+        public bool CalculateWorkoutSessionScore(Exercise exercise, bool isUpdate)
+        {
+            float difference = 0;
+            if (isUpdate)
+            {
+                // Get old exercise data
+                var oldExerciseSet = Exercises.GetExerciseSets(exercise.ExerciseId, exercise.WorkoutSessionId);
+                if (oldExerciseSet == null)
+                    return false;
+
+                difference = CalculateSet(exercise.Sets.ToArray(), exercise.ExerciseType) - CalculateSet(oldExerciseSet.Sets.ToArray(), oldExerciseSet.ExerciseType);
+            } else
+            {
+                difference = CalculateSet(exercise.Sets.ToArray(), exercise.ExerciseType);
+            }
+            if (WorkoutSessions.UpdateWorkoutSessionScore(difference, exercise.WorkoutSessionId) == false)
+                return false;
+
+            return true;
+        }
+
+        private float CalculateSet(IEnumerable<Set> sets, TypeOfExercise typeOfExercise)
+        {
+            float score = 0;
+
+            foreach(Set set in sets)
+            {
+                if(typeOfExercise == TypeOfExercise.Weigth)
+                {
+                    score += set.Repetitions + (set.Difficulty * 2);
+                }
+                else
+                {
+                    score += set.Repetitions / ((set.Difficulty + 1) * 2);
+                }
+            }
+            return score;
+        }
+
+        public bool DeleteWorkoutSession(WorkoutSession workoutSession)
+        {
+            WorkoutSessions.Remove(workoutSession);
+
+            return Complete() > 0 ? true : false;
+        }
+
+        public bool AddWorkoutSession(WorkoutSession workoutSession)
+        {
+            WorkoutSessions.Add(workoutSession);
+
+            return Complete() > 0 ? true : false;
         }
     }
 }

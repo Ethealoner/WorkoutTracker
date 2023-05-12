@@ -29,9 +29,7 @@ namespace WorkoutTracker.Application.Commands.WorkoutSessions
 
         public Task<bool> Handle(AddWorkoutSessionCommand request, CancellationToken cancellationToken)
         {
-            unitOfWork.WorkoutSessions.Add(request.workoutSession);
-
-            return Task.FromResult(unitOfWork.Complete() > 0 ? true : false);
+            return Task.FromResult(unitOfWork.AddWorkoutSession(request.workoutSession));
         }
     }
 }

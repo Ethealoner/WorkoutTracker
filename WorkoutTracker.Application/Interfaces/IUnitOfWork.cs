@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracker.Core.Models;
 
 namespace WorkoutTracker.Application.Interfaces
 {
@@ -10,6 +11,15 @@ namespace WorkoutTracker.Application.Interfaces
     {
         IWorkoutSessionRepository WorkoutSessions { get; }
         IExerciseRepository Exercises { get; }
+
+        bool AddExercise(Exercise exercise);
+        bool UpdateExercise(Exercise exercise);
+        bool DeleteExercise(Exercise exercise);
+        bool CalculateWorkoutSessionScore(Exercise exercise, bool isUpdate);
+
+        bool DeleteWorkoutSession(WorkoutSession workoutSession);
+        bool AddWorkoutSession(WorkoutSession workoutSession);
+
         
         int Complete();
     }

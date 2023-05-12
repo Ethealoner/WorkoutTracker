@@ -29,9 +29,7 @@ namespace WorkoutTracker.Application.Commands.Exercises
 
             public Task<bool> Handle(AddExerciseCommand request, CancellationToken cancellationToken)
             {
-                unitOfWork.Exercises.Add(request.exercise);
-
-                return Task.FromResult(unitOfWork.Complete() > 0 ? true : false);
+                return Task.FromResult(unitOfWork.AddExercise(request.exercise));
             }
         }
 }

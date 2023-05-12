@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using WorkoutTracker.Application.Commands.Exercises;
+using WorkoutTracker.Application.DTOs.Exercises;
 using WorkoutTracker.Application.Queries.Exercises;
 using WorkoutTracker.Core.Enums;
 using WorkoutTracker.Core.Models;
@@ -34,7 +35,7 @@ namespace WorkoutTracker.WebAPI.Controllers
                 return NotFound("Exercise was not found");
 
 
-            ExerciseModel model = new ExerciseModel()
+            ExerciseDto model = new ExerciseDto()
             {
                 exerciseId = exercise.ExerciseId,
                 exerciseName = exercise.Name,
@@ -46,7 +47,7 @@ namespace WorkoutTracker.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddExercise([FromBody] ExerciseModel exerciseModel)
+        public async Task<IActionResult> AddExercise([FromBody] ExerciseDto exerciseModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -85,7 +86,7 @@ namespace WorkoutTracker.WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateExercise([FromBody] ExerciseModel exerciseModel)
+        public async Task<IActionResult> UpdateExercise([FromBody] ExerciseDto exerciseModel)
         {
             var exercise = await _mediator.Send(new GetExerciseByIdQuery(exerciseModel.exerciseId, exerciseModel.workoutSessionId));
 

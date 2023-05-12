@@ -1,9 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WorkoutTracker.Core.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WorkoutTracker.WebAPI.Models
+namespace WorkoutTracker.Application.DTOs.Exercises
 {
-    public class ExerciseModel
+    public class ExerciseDto
     {
         [Required(ErrorMessage = "Exercise name is required")]
         public string exerciseName { get; set; }
@@ -15,6 +19,5 @@ namespace WorkoutTracker.WebAPI.Models
         public string typeOfExercise { get; set; }
         [Required(ErrorMessage = "repetitions is required")]
         public string repetitions { get; set; }
-
     }
 }

@@ -25,6 +25,11 @@ namespace WorkoutTracker.Infrastructure.Repositories
             return _context.exercises.Where(x => x.WorkoutSessionId == sessionWorkoutId).ToList();
         }
 
+        public Exercise GetExerciseSets(int exerciseId, string workoutSessionId)
+        {
+            return _context.exercises.Where(e => e.ExerciseId == exerciseId && e.WorkoutSessionId == workoutSessionId).Select(e => new Exercise { Sets = e.Sets, ExerciseType = e.ExerciseType}).FirstOrDefault();
+        }
+
         public bool UpdateExercise(Exercise exercise)
         {
             Exercise exerciseToBeUpdated = _context.exercises.Find(exercise.ExerciseId, exercise.WorkoutSessionId);

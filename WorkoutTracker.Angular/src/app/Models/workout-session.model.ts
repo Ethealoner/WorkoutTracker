@@ -15,5 +15,6 @@ export interface AddNewWorkoutSession {
 export interface WorkoutSessionDetails {
   workoutSessionId: string;
   createdAt: string;
+  workoutSessionScore: number;
   exerciseSummaries: ExerciseSummary[]
 }

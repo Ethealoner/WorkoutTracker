@@ -29,9 +29,7 @@ namespace WorkoutTracker.Application.Commands.Exercises
 
         public Task<bool> Handle(DeleteExerciseCommand request, CancellationToken cancellationToken)
         {
-            unitOfWork.Exercises.Remove(request.exercise);
-
-            return Task.FromResult(unitOfWork.Complete() > 0 ? true : false);
+            return Task.FromResult(unitOfWork.DeleteExercise(request.exercise));
         }
     }
 }

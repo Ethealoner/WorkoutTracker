@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutTracker.Application.Commands.WorkoutSessions;
+using WorkoutTracker.Application.DTOs.WorkoutSession;
 using WorkoutTracker.Application.Queries.WorkoutSessions;
 using WorkoutTracker.Core.Models;
 using WorkoutTracker.WebAPI.Models;
@@ -31,7 +32,7 @@ namespace WorkoutTracker.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddWorkoutSession([FromBody] AddWorkoutSessionModel model)
+        public async Task<IActionResult> AddWorkoutSession([FromBody] AddWorkoutSessionDto model)
         {
             if(!ModelState.IsValid)
             {
@@ -76,17 +77,18 @@ namespace WorkoutTracker.WebAPI.Controllers
             if (workoutSession == null)
                 return NotFound("Workout session was not found");
 
-            List<ExerciseSummary> exerciseSummaries = new List<ExerciseSummary>();
+            List<ExerciseSummaryDto> exerciseSummaries = new List<ExerciseSummaryDto>();
             foreach(Exercise exercise in workoutSession.Exercise)
             {
-                exerciseSummaries.Add(new ExerciseSummary(exercise.Name, exercise.ExerciseId));
+                exerciseSummaries.Add(new ExerciseSummaryDto(exercise.Name, exercise.ExerciseId));
             }
 
-            WorkoutSessionDetails sessionDetails = new WorkoutSessionDetails()
+            WorkoutSessionDto sessionDetails = new WorkoutSessionDto()
             {
                 WorkoutSessionId = workoutSession.WorkoutSessionId,
                 CreatedAt = workoutSession.WorkoutDate,
-                exerciseSummaries = exerciseSummaries
+                exerciseSummaries = exerciseSummaries,
+                workoutSessionScore = workoutSession.WorkoutScore
             };
 
             return Ok(sessionDetails);
