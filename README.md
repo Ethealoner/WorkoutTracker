@@ -22,6 +22,7 @@ This is a solution for creating SPA with ASP.NET Core MVC/Angular, following the
 * FluentAPI
 * XUnit
 * Azure
+* jQuery/Ajax
 
 ## Patterns Used
 
