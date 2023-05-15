@@ -37,6 +37,18 @@ body {
     color: white;
 }
 
+.button-delete {
+    background-color: red;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 10px;
+    color: white;
+}
+
+.button-delete:hover {
+    background-color: darkred;
+}
+
 .button-success:hover {
     background-color: darkgreen;
 }

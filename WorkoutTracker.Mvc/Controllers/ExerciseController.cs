@@ -29,20 +29,6 @@ namespace WorkoutTrackerMvc.Controllers
             return View(createExerciseViewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ExerciseDetail(CreateExerciseViewModel createExerciseViewModel)
-        {
-            if (!ModelState.IsValid)
-                return View(createExerciseViewModel);
-
-            Set newSet = new Set(createExerciseViewModel.setToAdd.Repetitions, createExerciseViewModel.setToAdd.Difficulty);
-            createExerciseViewModel.sets.Add(newSet);
-            createExerciseViewModel.setToAdd.Difficulty = 0;
-            createExerciseViewModel.setToAdd.Repetitions = 0;
-
-            return View(createExerciseViewModel);
-        }
-
         [HttpGet]
         public async Task<IActionResult> EditExerciseDetail(int exerciseId, string workoutSessionId)
         {
@@ -52,7 +38,7 @@ namespace WorkoutTrackerMvc.Controllers
                 exerciseId = exercise.ExerciseId,
                 ExerciseType = exercise.ExerciseType,
                 exerciseName = exercise.Name,
-                sets = exercise.Sets.ToList(),
+                Sets = exercise.Sets,
                 workoutSessionId = exercise.WorkoutSessionId,
             });
         }
@@ -67,7 +53,7 @@ namespace WorkoutTrackerMvc.Controllers
                 exercise.WorkoutSessionId = createExerciseViewModel.workoutSessionId;
                 exercise.Name = createExerciseViewModel.exerciseName;
                 exercise.ExerciseType = createExerciseViewModel.ExerciseType;
-                exercise.Sets = createExerciseViewModel.sets;
+                exercise.Sets = createExerciseViewModel.Sets.Where(s => s != null).ToList();
                 if (createExerciseViewModel.exerciseId != null)
                 {
                     exercise.ExerciseId = (int)createExerciseViewModel.exerciseId;
@@ -88,6 +74,11 @@ namespace WorkoutTrackerMvc.Controllers
             await _mediator.Send(new DeleteExerciseCommand(exerciseToDelete));
 
             return RedirectToAction("WorkoutSessionDetail", "WorkoutSession", new { workoutSessionId = workoutSessionId });
+        }
+
+        public  PartialViewResult AddNewSet()
+        {
+            return PartialView("~/Views/Exercise/EditorTemplates/Set.cshtml", new Set());
         }
 
     }

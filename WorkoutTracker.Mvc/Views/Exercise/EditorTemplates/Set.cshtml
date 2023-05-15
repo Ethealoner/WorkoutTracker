@@ -1,0 +1,23 @@
+﻿@using WorkoutTrackerMvc.Models.ExerciseViewModels
+@using WorkoutTracker.Core.Models;
+@{
+    Guid id = Guid.NewGuid();
+}
+@model Set
+
+    <input type="hidden" name="Sets.Index" value="@id"/>
+    <div class="set-box">
+        <div class="row">
+            <div class="col-lg-4">Number of reps</div>
+            <div class="col-lg-8">
+                <input asp-for="@Model.Repetitions" name="Sets[@id].Repetitions"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">Difficulty of rep</div>
+            <div class="col-lg-8">
+                <input asp-for="@Model.Difficulty" name="Sets[@id].Difficulty"/>
+            </div>
+        </div>
+    <input type="submit" value="Delete" class="button-delete" id="deleteSet" />
+    </div>

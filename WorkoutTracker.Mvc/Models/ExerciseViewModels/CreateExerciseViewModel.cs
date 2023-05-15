@@ -16,8 +16,7 @@ namespace WorkoutTrackerMvc.Models.ExerciseViewModels
 
         public TypeOfExercise ExerciseType { get; set; }
 
-        public List<Set> sets { get; set; }
-        public Set? setToAdd { get; set; }
+        public ICollection<Set> Sets { get; set; }
 
         public CreateExerciseViewModel(string workoutSessionId)
         {
@@ -26,25 +25,20 @@ namespace WorkoutTrackerMvc.Models.ExerciseViewModels
         }
         public CreateExerciseViewModel()
         {
-            sets = new List<Set>();
+
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            foreach (var set in sets)
+            foreach (var set in Sets)
             {
+                if (set == null)
+                    continue;
+
                 if (set.Repetitions <= 0)
                     yield return new ValidationResult("Repetition number must be greater than 0");
                 if (set.Difficulty <= 0)
                     yield return new ValidationResult("Difficulty number must be greater than 0");
-            }
-
-            if(setToAdd != null)
-            {
-                if (setToAdd.Repetitions <= 0)
-                    yield return new ValidationResult("New repetition number must be greater than 0");
-                if (setToAdd.Difficulty <= 0)
-                    yield return new ValidationResult("New difficulty number must be greater than 0");
             }
         }
     }
