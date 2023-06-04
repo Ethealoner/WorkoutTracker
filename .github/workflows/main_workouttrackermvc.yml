@@ -10,7 +10,7 @@ on:
       - 'WorkoutTracker.Application/**'
       - 'WorkoutTracker.Infrastructure/**'
       - 'WorkoutTracker.Tests/**'
-      - 'WorkoutTracker.WebAPI/**'
+      - 'WorkoutTracker.Mvc/**'
     branches:
       - main
   workflow_dispatch:
