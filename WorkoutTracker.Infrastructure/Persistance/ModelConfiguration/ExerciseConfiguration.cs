@@ -43,6 +43,10 @@ namespace WorkoutTracker.Infrastructure.Persistance.ModelConfiguration
                 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
                 v => JsonConvert.DeserializeObject<ICollection<Set>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
+            builder
+                .Property(e => e.ExerciseScore)
+                .HasDefaultValue(0)
+                .HasPrecision(2);
         }
     }
 }

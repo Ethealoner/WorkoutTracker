@@ -78,10 +78,10 @@ namespace WorkoutTracker.Infrastructure
                 if (oldExerciseSet == null)
                     return false;
 
-                difference = CalculateSet(exercise.Sets.ToArray(), exercise.ExerciseType) - CalculateSet(oldExerciseSet.Sets.ToArray(), oldExerciseSet.ExerciseType);
+                difference = exercise.CalculateSetScore() - oldExerciseSet.CalculateSetScore();
             } else
             {
-                difference = CalculateSet(exercise.Sets.ToArray(), exercise.ExerciseType);
+                difference = exercise.CalculateSetScore();
             }
             if (WorkoutSessions.UpdateWorkoutSessionScore(difference, exercise.WorkoutSessionId) == false)
                 return false;
@@ -89,23 +89,6 @@ namespace WorkoutTracker.Infrastructure
             return true;
         }
 
-        private float CalculateSet(IEnumerable<Set> sets, TypeOfExercise typeOfExercise)
-        {
-            float score = 0;
-
-            foreach(Set set in sets)
-            {
-                if(typeOfExercise == TypeOfExercise.Weigth)
-                {
-                    score += set.Repetitions + (set.Difficulty * 2);
-                }
-                else
-                {
-                    score += set.Repetitions / ((set.Difficulty + 1) * 2);
-                }
-            }
-            return score;
-        }
 
         public bool DeleteWorkoutSession(WorkoutSession workoutSession)
         {

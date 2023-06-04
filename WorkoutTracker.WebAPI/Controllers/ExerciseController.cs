@@ -50,7 +50,7 @@ namespace WorkoutTracker.WebAPI.Controllers
         public async Task<IActionResult> AddExercise([FromBody] ExerciseDto exerciseModel)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
 
             Exercise newExercise = new Exercise()
             {

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WorkoutTracker.Application.Commands.Exercises;
 using WorkoutTracker.Application.Queries.Exercises;
 using WorkoutTracker.Core.Models;
@@ -79,6 +80,14 @@ namespace WorkoutTrackerMvc.Controllers
         public  PartialViewResult AddNewSet()
         {
             return PartialView("~/Views/Exercise/EditorTemplates/Set.cshtml", new Set());
+        }
+
+        [HttpGet]
+        public async Task<PartialViewResult> GetBestSets(string exerciseName)
+        {
+            string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            var bestSets = await _mediator.Send(new GetBestExerciseSetsQuery(exerciseName, userId));
+            return PartialView("~/Views/Exercise/Partial/BestExercise.cshtml", bestSets);
         }
 
     }

@@ -40,7 +40,8 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(model => item.WorkoutDate)
+                            
+                            @Html.Raw(item.WorkoutDate.ToString("yyyy-MM-dd"))
                         </td>
                         <td>
                             @Html.DisplayFor(model => item.WorkoutScore)

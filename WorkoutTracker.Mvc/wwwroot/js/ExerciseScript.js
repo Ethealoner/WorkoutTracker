@@ -1,5 +1,4 @@
-﻿
-$(document).on('click', "#addSet", function (e) {
+﻿$(document).on('click', "#addSet", function (e) {
     $.ajax({
         url: "/Exercise/AddNewSet",
         cache: false,
@@ -8,12 +7,21 @@ $(document).on('click', "#addSet", function (e) {
     return false;
 });
 
-
-    
-        
-
 $(document.body).on("click", "#deleteSet", function () {
     $(this).parents(`div.set-box:first`).remove();
+    return false;
+});
+
+$(document.body).on("click", "#getBestSet", function () {
+    var exerciseName = $("#exerciseNameInput").val();
+    $("#best-exercise-container").empty();
+    $.ajax({
+        url: "/Exercise/GetBestSets",
+        data: { 'exerciseName': exerciseName },
+        cache: false,
+        success: function (html) { $("#best-exercise-container").append(html); }
+
+    });
     return false;
 });
 

@@ -14,6 +14,8 @@ namespace WorkoutTracker.Core.Models
 
         public TypeOfExercise ExerciseType { get; set; }
 
+        public float ExerciseScore { get; set; }
+
         public ICollection<Set> Sets { get; set; }
 
         public virtual WorkoutSession WorkoutSession { get; set; }
@@ -35,6 +37,26 @@ namespace WorkoutTracker.Core.Models
         {
             WorkoutSession = workoutSession;
             Sets = sets;
+        }
+
+        public float CalculateSetScore()
+        {
+            float score = 0;
+
+            foreach (Set set in Sets)
+            {
+                if (ExerciseType == TypeOfExercise.Weigth)
+                {
+                    score += set.Repetitions + (set.Difficulty * 2);
+                }
+                else
+                {
+                    score += set.Repetitions / ((set.Difficulty + 1) * 2);
+                }
+            }
+            ExerciseScore = score;
+
+            return ExerciseScore;
         }
     }
 

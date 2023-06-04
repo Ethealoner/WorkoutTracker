@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WorkoutTracker.Core.Models.Set>
+
+
+@if (Model is not null)
+{
+    <div>Best Sets:</div>
+<br />
+   @foreach (var item in Model)
+    {
+        <div class="set-box">
+            <div class="row">
+                <div>
+                    Number of reps : @Html.DisplayFor(modelItem => item.Repetitions)
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    Difficulty of rep: @Html.DisplayFor(modelItem => item.Difficulty)
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No best sets found</p>
+}
+

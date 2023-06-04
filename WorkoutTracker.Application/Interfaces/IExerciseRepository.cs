@@ -13,5 +13,6 @@ namespace WorkoutTracker.Application.Interfaces
         public Exercise Find(int exerciseId, string workoutSessionId);
         public bool UpdateExercise(Exercise exercise);
         public Exercise GetExerciseSets(int exerciseId, string workoutSessionId);
+        public IEnumerable<Set> GetBestExerciseSets(string userId, string exerciseName);
     }
 }

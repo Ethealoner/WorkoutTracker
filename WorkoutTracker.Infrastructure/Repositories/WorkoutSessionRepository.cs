@@ -15,7 +15,10 @@ namespace WorkoutTracker.Infrastructure
 
         public IEnumerable<WorkoutSession> GetWorkoutSessionsByUserId(string userId)
         {
-            return _context.sessions.Where(x => x.ApplicationUserId == userId).ToList();
+            return _context.sessions
+                .Where(x => x.ApplicationUserId == userId)
+                .OrderByDescending(x => x.WorkoutDate)
+                .ToList();
         }
 
         public WorkoutSession GetWorkoutSessionWithExercisesById(string workoutSessionId)

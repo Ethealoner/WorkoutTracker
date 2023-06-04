@@ -11,43 +11,49 @@
     <script src="~/js/ExerciseScript.js"></script>
 }
 
-<br />
-<div class="exercise-container">
-<form asp-area="" asp-controller="Exercise" asp-action="SaveExercise" method="Post">
-    <div asp-validation-summary="All"></div>
-    <div class="row">
-        <div class="col-lg-4">Exercise Name</div>
-        <div class="col-lg-8">
-            <input asp-for="exerciseName" placeholder="Exercise Name" autocomplete="on" class="form-control" />
-        </div>
-    </div>
     <br />
-    <div class="row">
-        <div class="col-lg-4">Exercise Type</div>
-        <div class="col-lg-8">
-            <select asp-for="ExerciseType" asp-items="Html.GetEnumSelectList<WorkoutTracker.Core.Enums.TypeOfExercise>()" class="form-control"></select>
+    <div class="exercise-container">
+        <form asp-area="" asp-controller="Exercise" asp-action="SaveExercise" method="Post">
+            <div asp-validation-summary="All"></div>
+            <div class="row">
+                <div class="col-lg-4">Exercise Name</div>
+                <div class="col-lg-8">
+                    <input asp-for="exerciseName" placeholder="Exercise Name" autocomplete="on" class="form-control" id="exerciseNameInput" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-4">Exercise Type</div>
+                <div class="col-lg-8">
+                    <select asp-for="ExerciseType" asp-items="Html.GetEnumSelectList<WorkoutTracker.Core.Enums.TypeOfExercise>()" class="form-control"></select>
+                </div>
+            </div>
+            <br />
+            <input asp-for="workoutSessionId" type="hidden" />
+            <input asp-for="exerciseId" type="hidden" />
+            <hr />
+            <br />
+            <div class="exercise-container-button-section">
+                <button type="button" class="button-save" id="addSet"><i data-feather="plus-circle"></i>New Set</button>
+                <button type="button" class="button-save" id="getBestSet"><i data-feather="plus-circle"></i>Get Best Set</button>
+            </div>
+            <br />
+            <hr />
+            <div class="sets-box">
+                <div id="sets">
+                    Sets:
+                    <br />
+                    @if (Model.Sets is not null)
+                    {
+                        @Html.EditorFor(m => Model.Sets)
+                    }
+                </div>
+                <div id="best-exercise-container"></div>
         </div>
-    </div>
-    <br />
-    <input asp-for="workoutSessionId"  type="hidden"/>
-    <input asp-for="exerciseId" type="hidden" />
-    <hr />
-        <br />
-        <div class="exercise-container-button-section">
-            <button type="button" class="button-save" id="addSet"><i data-feather="plus-circle"></i>New Set</button>
-        </div>
-        <br />
-<hr />
-    Sets:
-    <br />
-    <div id="sets">
-        @if(Model.Sets is not null)
-    {
-        @Html.EditorFor(m => Model.Sets)
-    }
-    </div>
-    <button type="submit" class="btn btn-primary">Save exercise</button>
-</form>
+
+        <button type="submit" class="btn btn-primary">Save exercise</button>
+    </form>
+
 </div>
 
 
