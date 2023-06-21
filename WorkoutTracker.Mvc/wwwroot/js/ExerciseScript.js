@@ -25,8 +25,15 @@ $(document.body).on("click", "#getBestSet", function () {
     return false;
 });
 
+$(document.body).on("click", "#getLatestSet", function () {
+    var exerciseName = $("#exerciseNameInput").val();
+    $("#best-exercise-container").empty();
+    $.ajax({
+        url: "/Exercise/GetLatestSets",
+        data: { 'exerciseName': exerciseName },
+        cache: false,
+        success: function (html) { $("#best-exercise-container").append(html); }
 
-
-
-
-
+    });
+    return false;
+});

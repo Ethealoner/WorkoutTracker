@@ -47,10 +47,29 @@ namespace WorkoutTracker.Infrastructure.Repositories
 
         }
 
+        public IEnumerable<Set> GetLatestExerciseSets(string userId, string exerciseName)
+        {
+            var bestExerciseSets = _context.sessions
+                .Where(s => s.ApplicationUserId == userId)
+                .OrderByDescending(s => s.WorkoutDate)
+                .SelectMany(s => s.Exercise, (s, e) =>
+                    new
+                    {
+                        e.Name,
+                        e.Sets,
+                        e.ExerciseScore
+                    })
+                .Where(e => e.Name == exerciseName)
+                .FirstOrDefault();
+
+            return bestExerciseSets?.Sets;
+        }
+
         public Exercise GetExerciseSets(int exerciseId, string workoutSessionId)
         {
             return _context.exercises.Where(e => e.ExerciseId == exerciseId && e.WorkoutSessionId == workoutSessionId).Select(e => new Exercise { Sets = e.Sets, ExerciseType = e.ExerciseType}).FirstOrDefault();
         }
+
 
         public bool UpdateExercise(Exercise exercise)
         {

@@ -43,5 +43,15 @@ namespace WorkoutTracker.Infrastructure
             workoutSession.WorkoutScore += score;
             return true;
         }
+
+        public bool UpdateWorkoutSessionWeight(double weight, string workoutSessionId)
+        {
+            var workoutSession = _context.sessions.FirstOrDefault(s => s.WorkoutSessionId == workoutSessionId);
+            if (workoutSession == null)
+                return false;
+
+            workoutSession.Weight = weight;
+            return true;
+        }
     }
 }

@@ -29,7 +29,10 @@
                         Score
                     </th>
                     <th>
-
+                        Weight
+                    </th>
+                    <th>
+                        
                     </th>
                 </tr>
             </thead>
@@ -45,6 +48,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(model => item.WorkoutScore)
+                        </td>
+                        <td>
+                            @Html.Raw(item.Weight.ToString("0.##"))
                         </td>
                         <td class="action-section">
                             <div class="dropdown">

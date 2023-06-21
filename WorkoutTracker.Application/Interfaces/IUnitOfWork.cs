@@ -19,7 +19,7 @@ namespace WorkoutTracker.Application.Interfaces
 
         bool DeleteWorkoutSession(WorkoutSession workoutSession);
         bool AddWorkoutSession(WorkoutSession workoutSession);
-
+        bool UpdateWorkoutSessionWeight(string workoutSessionId, double weight);
         
         int Complete();
     }

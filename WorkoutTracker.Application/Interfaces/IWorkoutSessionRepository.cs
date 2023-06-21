@@ -8,5 +8,6 @@ namespace WorkoutTracker.Application.Interfaces
         IEnumerable<WorkoutSession> GetWorkoutSessionsByUserId(string userId);
         WorkoutSession GetWorkoutSessionWithExercisesById(string workoutSessionId);
         bool UpdateWorkoutSessionScore(float score, string workoutSessionId);
+        bool UpdateWorkoutSessionWeight(double weight, string workoutSessionId);
     }
 }

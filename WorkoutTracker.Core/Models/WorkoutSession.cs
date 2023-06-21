@@ -11,6 +11,7 @@ namespace WorkoutTracker.Core.Models
 
         public DateTime WorkoutDate { get; set; }
         public string ApplicationUserId { get; set; }
+        public double Weight { get; set; }
 
         public virtual ICollection<Exercise>? Exercise { get; set; }
 
@@ -18,6 +19,7 @@ namespace WorkoutTracker.Core.Models
         {
 
         }
+
         public WorkoutSession(string workoutSessionId, double workoutScore, DateTime workoutDate, string applicationUserId)
         {
             WorkoutSessionId = workoutSessionId;

@@ -90,5 +90,14 @@ namespace WorkoutTrackerMvc.Controllers
             return PartialView("~/Views/Exercise/Partial/BestExercise.cshtml", bestSets);
         }
 
+
+        [HttpGet]
+        public async Task<PartialViewResult> GetLatestSets(string exerciseName)
+        {
+            string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            var bestSets = await _mediator.Send(new GetLatestExerciseSetsQuery(exerciseName, userId));
+            return PartialView("~/Views/Exercise/Partial/BestExercise.cshtml", bestSets);
+        }
+
     }
 }

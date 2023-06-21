@@ -7,6 +7,8 @@
 
 <div>
     Workout Session Details - @Model.date
+    <br />
+    Weight at the time of exercise - @Html.DisplayFor(x => x.weight)kg
 </div>
 
 @section Scripts{
@@ -21,6 +23,13 @@
             <button class="button-success" type="submit" asp-area="" asp-controller="Exercise" asp-action="ExerciseDetail" asp-route-Id="@Model.workoutSessionId"><i data-feather="plus-circle"></i> New Exercise</button>
         </form>
     </div>
+    <div class="workout-container-button-section">
+        <form asp-area="" asp-controller="WorkoutSession" asp-action="UpdateWorkoutSessionWeight" >
+            @Html.EditorFor(x => x.weight)
+            <input asp-for="workoutSessionId" type="hidden" />
+            <button class="button-success" type="submit"><i data-feather="plus-circle"></i> Update weight</button>
+        </form>
+    </div>
 
 
 <table class="table">
@@ -30,6 +39,10 @@
                 @Html.DisplayNameFor(model => model.exercises.FirstOrDefault().Name)
             </th>
             <th>
+                Score
+            </th>
+            <th>
+
             </th>
         </tr>
     </thead>
@@ -41,6 +54,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(model => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ExerciseScore)
                 </td>
                 <td class="action-section">
                     <div class="dropdown">

@@ -42,7 +42,12 @@ namespace WorkoutTracker.Infrastructure.Persistance.ModelConfiguration
             builder
                 .HasMany(s => s.Exercise)
                 .WithOne(e => e.WorkoutSession)
-                .HasForeignKey(e => e.WorkoutSessionId); 
+                .HasForeignKey(e => e.WorkoutSessionId);
+
+            builder
+                .Property(s => s.Weight)
+                .HasDefaultValue(0)
+                .HasPrecision(2);
         }
     }
 }

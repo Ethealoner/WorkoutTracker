@@ -103,5 +103,12 @@ namespace WorkoutTracker.Infrastructure
 
             return Complete() > 0 ? true : false;
         }
+
+        public bool UpdateWorkoutSessionWeight(string workoutSessionId, double weight)
+        {
+            WorkoutSessions.UpdateWorkoutSessionWeight(weight, workoutSessionId);
+
+            return Complete() > 0 ? true : false;
+        }
     }
 }
