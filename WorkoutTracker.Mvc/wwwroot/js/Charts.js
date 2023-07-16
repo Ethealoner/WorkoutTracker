@@ -14,6 +14,7 @@ $(document).on('click', "#getChartData", function (e) {
             addData(data)
             if (chart != null) {
                 chart.destroy();
+                chartData = [];
             }
             if (data.length == 0) {
                 $("#chartMessage").css("color", "red");
