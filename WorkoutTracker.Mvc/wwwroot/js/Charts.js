@@ -11,17 +11,21 @@ $(document).on('click', "#getChartData", function (e) {
         data: { 'exerciseName': exerciseName },
         success: function (data)
         {
-            addData(data)
             if (chart != null) {
                 chart.destroy();
                 chartData = [];
             }
+
+            addData(data)
+
             if (data.length == 0) {
                 $("#chartMessage").css("color", "red");
                 $("#chartMessage").html("Exercise not found");
                 return;
             }
+
             $("#chartMessage").html("");
+
             chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 theme: "light2",
@@ -37,6 +41,7 @@ $(document).on('click', "#getChartData", function (e) {
                     dataPoints: chartData
                 }]
             })
+
             chart.render();
         }
     });
