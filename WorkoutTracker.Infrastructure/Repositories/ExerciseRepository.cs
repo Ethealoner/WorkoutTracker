@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkoutTracker.Application.Interfaces;
+using WorkoutTracker.Core.Aggregates;
 using WorkoutTracker.Core.Models;
 using WorkoutTracker.Infrastructure.Persistance;
 
@@ -82,6 +83,23 @@ namespace WorkoutTracker.Infrastructure.Repositories
             exerciseToBeUpdated.CalculateSetScore();
             _context.exercises.Update(exerciseToBeUpdated);
             return true;
+        }
+
+        public IEnumerable<ExerciseWithDate> GetExercisesWithDatesByName(string userId, string exerciseName)
+        {
+            var exercisesWithDate = _context.sessions
+                .Where(s => s.ApplicationUserId == userId)
+                .OrderByDescending(s => s.WorkoutDate)
+                .SelectMany(s => s.Exercise, (s, e) =>
+                    new ExerciseWithDate
+                    {
+                        Exercise = e,
+                        ExerciseDate = s.WorkoutDate
+                    })
+                .Where(e => e.Exercise.Name == exerciseName)
+                .ToList();
+
+            return exercisesWithDate;
         }
     }
 }

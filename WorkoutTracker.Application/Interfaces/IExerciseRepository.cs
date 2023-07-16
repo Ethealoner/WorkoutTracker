@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutTracker.Core.Aggregates;
 using WorkoutTracker.Core.Models;
 
 namespace WorkoutTracker.Application.Interfaces
@@ -15,5 +16,6 @@ namespace WorkoutTracker.Application.Interfaces
         public Exercise GetExerciseSets(int exerciseId, string workoutSessionId);
         public IEnumerable<Set> GetBestExerciseSets(string userId, string exerciseName);
         public IEnumerable<Set> GetLatestExerciseSets(string userId, string exerciseName);
+        public IEnumerable<ExerciseWithDate> GetExercisesWithDatesByName(string userId, string exerciseName);
     }
 }

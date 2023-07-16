@@ -12,4 +12,6 @@ Hello @User.Identity?.Name !
     <button class="button-success" type="submit" asp-area="" asp-controller="WorkoutSession" asp-action="GetWorkoutSessions" asp-route-Id="@UserManager.GetUserId(@User)">Sessions</button>
 </form>
 
-
+<form method="get">
+    <button class="button-success" type="submit" asp-area="" asp-controller="Charts" asp-action="Index" >Charts</button>
+</form>

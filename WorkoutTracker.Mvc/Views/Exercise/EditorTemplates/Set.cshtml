@@ -10,13 +10,13 @@
         <div class="row">
             <div class="col-lg-4">Number of reps</div>
             <div class="col-lg-8">
-                <input asp-for="@Model.Repetitions" name="Sets[@id].Repetitions" type="number"/>
+                <input asp-for="@Model.Repetitions" name="Sets[@id].Repetitions" type="number" value=""/>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-4">Difficulty of rep</div>
             <div class="col-lg-8">
-                <input asp-for="@Model.Difficulty" name="Sets[@id].Difficulty" type="number"/>
+                <input asp-for="@Model.Difficulty" name="Sets[@id].Difficulty" type="number" value=""/>
             </div>
         </div>
     <input type="submit" value="Delete" class="button-delete" id="deleteSet" />
