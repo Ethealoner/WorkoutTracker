@@ -11,6 +11,7 @@ namespace WorkoutTracker.Application.Interfaces
     {
         IWorkoutSessionRepository WorkoutSessions { get; }
         IExerciseRepository Exercises { get; }
+        IExerciseNoteRepository ExerciseNotes { get; }
 
         bool AddExercise(Exercise exercise);
         bool UpdateExercise(Exercise exercise);
@@ -20,7 +21,9 @@ namespace WorkoutTracker.Application.Interfaces
         bool DeleteWorkoutSession(WorkoutSession workoutSession);
         bool AddWorkoutSession(WorkoutSession workoutSession);
         bool UpdateWorkoutSessionWeight(string workoutSessionId, double weight);
-        
+
+        bool AddOrUpdateExerciseNote(ExerciseNote exerciseNote);
+
         int Complete();
     }
 }

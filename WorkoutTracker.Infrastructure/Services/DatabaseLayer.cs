@@ -17,6 +17,7 @@ namespace WorkoutTracker.Infrastructure.Services
             services.AddTransient<IWorkoutSessionRepository, WorkoutSessionRepository>();
             services.AddTransient<IExerciseRepository, ExerciseRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IExerciseNoteRepository, ExerciseNoteRepository>();
         }
     }
 }

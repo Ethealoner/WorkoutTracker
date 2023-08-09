@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using WorkoutTracker.Application.Commands.ExerciseNotes;
 using WorkoutTracker.Application.Commands.Exercises;
+using WorkoutTracker.Application.Queries.ExerciseNotes;
 using WorkoutTracker.Application.Queries.Exercises;
 using WorkoutTracker.Core.Models;
 using WorkoutTrackerMvc.Models.ExerciseViewModels;
@@ -97,6 +99,33 @@ namespace WorkoutTrackerMvc.Controllers
             string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
             var bestSets = await _mediator.Send(new GetLatestExerciseSetsQuery(exerciseName, userId));
             return PartialView("~/Views/Exercise/Partial/BestExercise.cshtml", bestSets);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetExerciseNotes(string exerciseName)
+        {
+            string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            var exerciseNotes = await _mediator.Send(new GetExerciseNoteQuery(userId, exerciseName));
+
+            if (exerciseNotes == null)
+                return Content("");
+
+            return Content(exerciseNotes.Notes);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveExerciseNotes(string exerciseName, string exerciseNotes)
+        {
+            string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            ExerciseNote exerciseNote = new ExerciseNote()
+            {
+                ApplicationUserId = userId,
+                ExerciseName = exerciseName,
+                Notes = exerciseNotes
+            };
+            await _mediator.Send(new AddExerciseNoteCommand(exerciseNote));
+
+            return Ok();
         }
 
     }

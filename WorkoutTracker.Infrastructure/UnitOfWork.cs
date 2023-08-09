@@ -17,12 +17,14 @@ namespace WorkoutTracker.Infrastructure
         public IWorkoutSessionRepository WorkoutSessions { get; private set; }
         public IExerciseRepository Exercises { get; private set; }
 
+        public IExerciseNoteRepository ExerciseNotes { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             WorkoutSessions = new WorkoutSessionRepository(_context);
             Exercises = new ExerciseRepository(_context);
+            ExerciseNotes = new ExerciseNoteRepository(_context);
         }
 
         public int Complete()
@@ -107,6 +109,13 @@ namespace WorkoutTracker.Infrastructure
         public bool UpdateWorkoutSessionWeight(string workoutSessionId, double weight)
         {
             WorkoutSessions.UpdateWorkoutSessionWeight(weight, workoutSessionId);
+
+            return Complete() > 0 ? true : false;
+        }
+
+        public bool AddOrUpdateExerciseNote(ExerciseNote exerciseNote)
+        {
+            ExerciseNotes.AddOrUpdate(exerciseNote);
 
             return Complete() > 0 ? true : false;
         }

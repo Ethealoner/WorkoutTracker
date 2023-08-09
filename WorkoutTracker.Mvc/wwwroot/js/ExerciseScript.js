@@ -37,3 +37,30 @@ $(document.body).on("click", "#getLatestSet", function () {
     });
     return false;
 });
+
+$(document.body).on("click", "#loadNotes", function () {
+    var exerciseName = $("#exerciseNameInput").val();
+
+    $.ajax({
+        url: "/Exercise/GetExerciseNotes",
+        data: { 'exerciseName': exerciseName },
+        cache: false,
+        success: function (Notes) {
+            $("#exerciseNotes").val(Notes);
+        }
+    });
+    return false;
+});
+
+$(document.body).on("click", "#saveNotes", function () {
+    var exerciseName = $("#exerciseNameInput").val();
+    var exerciseNotes = $("#exerciseNotes").val();
+    $.ajax({
+        url: "/Exercise/SaveExerciseNotes",
+        method: "post",
+        data: { 'exerciseName': exerciseName, 'exerciseNotes': exerciseNotes },
+        cache: false,
+        success: function (Notes) { }
+    });
+    return false;
+});

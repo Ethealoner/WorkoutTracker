@@ -16,6 +16,7 @@ namespace WorkoutTracker.Infrastructure.Persistance
         public DbSet<WorkoutSession> sessions { get; set; }
         public DbSet<Exercise> exercises { get; set; }
         public DbSet<ApplicationUser> applicationUsers { get; set; }
+        public DbSet<ExerciseNote> exerciseNotes { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

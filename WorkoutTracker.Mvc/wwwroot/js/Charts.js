@@ -33,7 +33,7 @@ $(document).on('click', "#getChartData", function (e) {
                     text: exerciseName + " Summary"
                 },
                 axisY: {
-                    title: "Date",
+                    title: "Score",
                     titleFontSize: 24
                 },
                 data: [{
