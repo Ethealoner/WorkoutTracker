@@ -18,9 +18,17 @@ namespace WorkoutTrackerMvc.Controllers
             _mediator = mediator;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+            var exerciseNames = new List<string>();
+            var readExerciseNames = await _mediator.Send(new GetExerciseNamesQuery(userId));
+
+            if (readExerciseNames != null)
+                exerciseNames = (List<string>) readExerciseNames;
+
+            return View(exerciseNames);
         }
 
         [HttpGet]

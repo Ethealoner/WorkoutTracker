@@ -18,7 +18,12 @@
             <div class="row">
                 <div class="col-lg-4">Exercise Name</div>
                 <div class="col-lg-8">
-                    <input asp-for="exerciseName" placeholder="Exercise Name" autocomplete="on" class="form-control" id="exerciseNameInput" />
+                    <input asp-for="exerciseName" placeholder="Exercise Name" autocomplete="on" class="form-control" id="exerciseNameInput"  list="usedExerciseNames"/>
+                    <datalist id="usedExerciseNames">
+                        @foreach (var item in Model.ExerciseNames) {
+                           <option value="@item">@item</option>
+                         }
+                    </datalist>
                 </div>
             </div>
             <br />

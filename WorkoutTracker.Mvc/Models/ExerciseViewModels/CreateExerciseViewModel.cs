@@ -17,6 +17,7 @@ namespace WorkoutTrackerMvc.Models.ExerciseViewModels
         public TypeOfExercise ExerciseType { get; set; }
 
         public ICollection<Set> Sets { get; set; }
+        public IEnumerable<string> ExerciseNames { get; set; } = new List<string>();
 
         public CreateExerciseViewModel(string workoutSessionId)
         {

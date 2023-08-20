@@ -101,5 +101,17 @@ namespace WorkoutTracker.Infrastructure.Repositories
 
             return exercisesWithDate;
         }
+
+        public IEnumerable<string> GetExerciseNames(string userId)
+        {
+            var exerciseNames = _context.sessions
+                .Where(s => s.ApplicationUserId == userId)
+                .SelectMany(s => s.Exercise, (s, e) =>
+                new string(e.Name))
+                .Distinct()
+                .ToList();
+
+            return exerciseNames;
+        }
     }
 }

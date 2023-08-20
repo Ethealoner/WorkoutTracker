@@ -26,24 +26,38 @@ namespace WorkoutTrackerMvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult ExerciseDetail(string Id)
+        public async Task<IActionResult> ExerciseDetail(string Id)
         {
+            string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
             CreateExerciseViewModel createExerciseViewModel = new CreateExerciseViewModel() { workoutSessionId = Id};
+
+            var exerciseNames = await _mediator.Send(new GetExerciseNamesQuery(userId));
+            if (exerciseNames != null)
+                createExerciseViewModel.ExerciseNames = exerciseNames;
+
             return View(createExerciseViewModel);
         }
 
         [HttpGet]
         public async Task<IActionResult> EditExerciseDetail(int exerciseId, string workoutSessionId)
         {
-            Exercise exercise = await _mediator.Send(new GetExerciseByIdQuery(exerciseId, workoutSessionId));
-            return View("ExerciseDetail",new CreateExerciseViewModel()
+            string userId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            var exercise = await _mediator.Send(new GetExerciseByIdQuery(exerciseId, workoutSessionId));
+            var exerciseNames = await _mediator.Send(new GetExerciseNamesQuery(userId));
+
+            CreateExerciseViewModel createExerciseViewModel = new CreateExerciseViewModel() 
             {
                 exerciseId = exercise.ExerciseId,
                 ExerciseType = exercise.ExerciseType,
                 exerciseName = exercise.Name,
                 Sets = exercise.Sets,
-                workoutSessionId = exercise.WorkoutSessionId,
-            });
+                workoutSessionId = exercise.WorkoutSessionId
+            };
+
+            if (exerciseNames != null)
+                createExerciseViewModel.ExerciseNames = exerciseNames;
+
+            return View("ExerciseDetail", createExerciseViewModel);
         }
 
 

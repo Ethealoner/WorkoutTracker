@@ -17,5 +17,6 @@ namespace WorkoutTracker.Application.Interfaces
         public IEnumerable<Set> GetBestExerciseSets(string userId, string exerciseName);
         public IEnumerable<Set> GetLatestExerciseSets(string userId, string exerciseName);
         public IEnumerable<ExerciseWithDate> GetExercisesWithDatesByName(string userId, string exerciseName);
+        public IEnumerable<String> GetExerciseNames(string userId);
     }
 }
