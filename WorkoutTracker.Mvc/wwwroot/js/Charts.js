@@ -57,3 +57,86 @@ function addData(data) {
     }
 }
 
+$(document).on('click', "#getScoreChartData", function (e) {
+    $.ajax({
+        url: "/Charts/GetScoreChartData",
+        cache: false,
+        success: function (data) {
+            if (chart != null) {
+                chart.destroy();
+                chartData = [];
+            }
+
+            addData(data)
+
+            if (data.length == 0) {
+                $("#chartMessage").css("color", "red");
+                $("#chartMessage").html("Exercise not found");
+                return;
+            }
+
+            $("#chartMessage").html("");
+
+            chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text:"Workout Scores Summary"
+                },
+                axisY: {
+                    title: "Score",
+                    titleFontSize: 24
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: chartData
+                }]
+            })
+
+            chart.render();
+        }
+    });
+    return false;
+});
+
+$(document).on('click', "#getWeightChartData", function (e) {
+    $.ajax({
+        url: "/Charts/GetWeightChartData",
+        cache: false,
+        success: function (data) {
+            if (chart != null) {
+                chart.destroy();
+                chartData = [];
+            }
+
+            addData(data)
+
+            if (data.length == 0) {
+                $("#chartMessage").css("color", "red");
+                $("#chartMessage").html("Exercise not found");
+                return;
+            }
+
+            $("#chartMessage").html("");
+
+            chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Weight Summary"
+                },
+                axisY: {
+                    title: "Score",
+                    titleFontSize: 24
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: chartData
+                }]
+            })
+
+            chart.render();
+        }
+    });
+    return false;
+});

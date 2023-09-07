@@ -13,12 +13,41 @@ namespace WorkoutTracker.Infrastructure
         {
         }
 
+        public IEnumerable<WorkoutSession> GetWeightsWithDates(string userId)
+        {
+            var sessions = _context.sessions
+                .Where(x => x.ApplicationUserId == userId && x.Weight > 0)
+                .Select(x => new WorkoutSession 
+                {
+                   WorkoutDate = x.WorkoutDate,
+                   Weight = x.Weight
+                })
+                .OrderByDescending(x => x.WorkoutDate)
+                .ToList();
+
+            return sessions ;
+        }
+
         public IEnumerable<WorkoutSession> GetWorkoutSessionsByUserId(string userId)
         {
             return _context.sessions
                 .Where(x => x.ApplicationUserId == userId)
                 .OrderByDescending(x => x.WorkoutDate)
                 .ToList();
+        }
+
+        public IEnumerable<WorkoutSession> GetWorkoutSessionsScoresWithDates(string userId)
+        {
+            var sessions = _context.sessions
+                .Where(x => x.ApplicationUserId == userId && x.WorkoutScore > 0)
+                .Select(x => new WorkoutSession {
+                    WorkoutDate = x.WorkoutDate,
+                    WorkoutScore = x.WorkoutScore
+                     })
+                .OrderByDescending(x => x.WorkoutDate)
+                .ToList();
+
+            return sessions;
         }
 
         public WorkoutSession GetWorkoutSessionWithExercisesById(string workoutSessionId)
